@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<link rel="stylesheet" href="/css/hljs.min.css"/>
+		<title>Cypher32 - How to Set Up a Counter-Strike: Source Server</title>
+		<meta name="description" content="In this post I’ll teach you how to set up your very own Counter-Strike: Source game server.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>How to Set Up a Counter-Strike: Source Server</h2>
+							<em class="date">4/18/2024</em>
+							<hr>
+							<p>In this post I’ll teach you how to set up your very own Counter-Strike: Source game server.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/4.2024/css.webp" alt="css.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Requirements</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<ul>
+								<li>A computer, server, or VPS, anything with root shell access.</li>
+								<li>Your machine should have at least 1GB of RAM and 1 CPU core for a decent experience. This game came out in 2004, come on.</li>
+								<li>Own CS:S with a Steam account that is not limited and/or banned in any way.</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Prepare the Server</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><em>This tutorial was written for Linux, all of these steps could be adapted for Windows, but if you want to use Windows to host anything other than LAN… just why? This was all tested on Ubuntu 22.04, but should also work on any other Debian based distros.</em></p>
+							<p>I still have Counter-Strike on my mind so it seems fitting to explain how to set up a server for this game after my last post. Anyway the first thing we’ll need to do is get something called SteamCMD installed. It is exactly what it sounds like, a command line interface for the Steam client. Although it's not exactly intended for playing games, mostly for headless dedicated servers.</p>
+							<p>To get SteamCMD installed we will need to enable and install some 32 bit libraries which are disabled by default on most modern Linux distros. Steam still heavily relies on older 32 bit libraries so there is really no way around this. You can start with these commands below:</p>
+							<pre><code class="language-plaintext">sudo add-apt-repository multiverse
+sudo dpkg --add-architecture i386
+sudo apt update</code></pre>
+							<p>In the first and second command we are adding the 32 bit repository then enabling 32 bit support. And lastly we run an update to show the apt package manager we have new sources to pull in packages from. If you get an error saying the <em>add-apt-repository</em> command wasn’t found then you can run this command below then try again.</p>
+							<pre><code class="language-plaintext">sudo apt-get install software-properties-common</code></pre>
+							<p><strong>However</strong>, on Debian 12 (Bookworm) and up the add-apt-repository command is unavailable. So if you are using Debian 12 or newer you will have to <a target="_blank" href="https://stackoverflow.com/questions/76688863/apt-add-repository-doesnt-work-on-debian-12">fiddle with it</a> a bit more. That’s a bit out of the scope of this post.</p>
+							<p>The next step is to install a few libraries that in my experience SteamCMD <strong>does not</strong> pull in automatically as dependencies, then to install SteamCMD itself. We also install a program called <em>tmux</em> which lets us keep user created terminal processes (in this case the server) running in the background even when we don’t have an SSH connection to the server.</p>
+							<pre><code class="language-plaintext">sudo apt install libsdl2-2.0-0:i386 libncurses5:i386 libtinfo5:i386 steamcmd tmux</code></pre>
+							<p>Great, after installing SteamCMD along with those libraries, we’re now ready to move on to installing up the server.</p>
+						</div>
+					</div>
+					<h1>Installing the Server</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>We’re now ready to download the dedicated server. Type in: <code class="inline language-plaintext">steamcmd</code>. This will launch the SteamCMD program, and it will most likely download an update on first launch. After SteamCMD has opened it will ask you to login. Type these three commands to login and then download the CS:S game server.</p>
+							<pre><code class="language-plaintext">login anonymous
+app_update 232330 validate
+exit</code></pre>
+							<p>SteamCMD lets you login either with a real Steam account or anonymously, not everything can be downloaded when logging in anonymously, however the CS:S dedicated server can! 232330 is the App ID for the CS:S dedicated server, then we are validating the files, then exiting SteamCMD.</p>
+							<p>Now in your home directory you should have a <em>Steam</em> folder. We’re just going to <em>cd</em> (change directory) right into the CS:S server files. This command should do it, if not then figure out where you downloaded the thing!</p>
+							<pre><code class="language-plaintext">cd ~/Steam/steamapps/common/"Counter-Strike Source Dedicated Server/"</code></pre>
+							<p>When you run an <em>ls -l</em> (list directory) your files should look something like this:</p>
+							<pre><code class="language-plaintext">drwxrwxr-x  2 cypher32 cypher32  4096 Apr 17 11:51 bin
+drwxrwxr-x 11 cypher32 cypher32  4096 Apr 17 13:03 cstrike
+drwxrwxr-x  5 cypher32 cypher32  4096 Apr 17 11:51 hl2
+drwxrwxr-x  6 cypher32 cypher32  4096 Apr 17 11:51 platform
+-rwxrwxr-x  1 cypher32 cypher32  8204 Apr 17 11:51 srcds_linux
+-rwxrwxr-x  1 cypher32 cypher32  9729 Apr 17 11:50 srcds_run
+-rw-rw-r--  1 cypher32 cypher32     5 Apr 17 12:59 steam_appid.txt
+-rwxrwxr-x  1 cypher32 cypher32 47205 Apr 17 11:50 thirdpartylegalnotices.txt</code></pre>
+							<p>Ok great we’re getting to the fun part. Before we can start the server we need to grab you a token from Steam to use with your server. This is a little annoying to do but having this will allow you to fully enable VAC (Valve Anti Cheat) and secure the server. Simply go to <a target="_blank" href="https://steamcommunity.com/dev/managegameservers">this page</a>, login with your Steam account, scroll to the bottom and use App ID 240 to make a new token. You can set the memo to whatever you want.</p>
+							<p>We now need to make a script to be able to start your server. So in this directory go ahead and open a new file using whatever text editor you like. It doesn’t matter what you name it, I’m just going to do: <code class="inline language-plaintext">nano ./run.sh</code> to edit the file with <em>nano</em> and call it <em>run.sh</em>. You can then copy my startup script into your file:</p>
+							<pre><code class="language-bash">#!/bin/bash
+tmux new -s cstrike-server './srcds_run -console -game cstrike -secure +maxplayers 32 +map de_dust2 +sv_setsteamaccount "[PUT YOUR TOKEN HERE]"'</code></pre>
+							<p>What this script does is open a <em>tmux</em> window, as mentioned before this program lets us keep our process open, then it launches the CS:S server. The <em>-s</em> flag on <em>tmux</em> sets the window name to <em>cstrike-server</em>, you can change that. Next, <em>srcds_run</em> is the executable for the Source Dedicated Server on Linux. We are then telling it to use the console, that we want to use <em>cstrike</em> or CS:S as the game, to secure the server, setting the max players the server will let join, setting the map the server will boot up to, then linking that token we just got from Steam. Don’t forget to put the token in!</p>
+							<p>You can save this file and launch the server right now to give it a try! First we need to make the script executable, then we can run it:</p>
+							<pre><code class="language-bash">chmod +x ./run.sh
+./run.sh</code></pre>
+							<p>The first command makes the script executable, then with the second command we boot the server. Your server should now be running. However if it’s not on your local network you will need to forward the ports. Learning how to forward ports is out of the scope of this post. Once you figure it out go ahead and forward the ports listed below:</p>
+							<ul>
+								<li>27015 TCP/UDP for game transmission.</li>
+								<li>27005 UDP the client port.</li>
+								<li>27020 UDP the SourceTV port.</li>
+								<li>26900 UDP the Steam port.</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Conclusion</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/4.2024/maxres/de_dust2.jpg"><img class="image-right-a" src="/images/posts/4.2024/de_dust2.webp" alt="de_dust2.webp" width="200" height="125"></a>And that is it. You now have a server up and running publicly available to friends, if you forwarded ports. Now there is a lot more we can do with this server, for example we can install plugins, custom maps, custom models, fine tune your server configuration, etc. But this tutorial was meant to just be the basics. I might make a second post showing you how to install Meta Mod and Source Mod along with plugins though!</p>
+							<p>Now this is a complicated topic and process, so here are some more resources below which could help you if you encountered any problems or if you want to try and install plugins yourself:</p>
+							<ul>
+								<li><a target="_blank" href="https://developer.valvesoftware.com/wiki/SteamCMD">SteamCMD - Valve Developer Wiki</a></li>
+								<li><a target="_blank" href="https://developer.valvesoftware.com/wiki/Source_Dedicated_Server">Source Dedicated Server - Valve Developer Wiki</a></li>
+								<li><a target="_blank" href="https://www.sourcemod.net/">Source Mod (For Plugin Support)</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+		<script>
+			hljs.highlightAll();
+			document.querySelectorAll('code.inline').forEach(el => {
+				hljs.highlightElement(el);
+			});
+		</script>
+	</body>
+</html>
