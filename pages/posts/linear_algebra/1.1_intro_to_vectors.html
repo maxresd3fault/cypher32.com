@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Linear Algebra 1.1 - Intro to Vectors</title>
+		<meta name="description" content="For the purpose of better understanding my current linear algebra class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces vectors, common operations performed on vectors, and common properties of vectors.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Linear Algebra 1.1 - Intro to Vectors</h2>
+							<em class="date">1/29/2026</em>
+							<hr>
+							<p>This article is part of a series on linear algebra. Find more <a href="#">soon</a>.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/linear_algebra/3D-graph.webp" alt="3D-graph.webp" width="300" height="225"/>
+						</div>
+					</div>
+					<h1>Vector Basics</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>For the purpose of better understanding my current linear algebra class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces vectors, common operations performed on vectors, and common properties of vectors.</p>
+							<p>Linear algebra focuses on the manipulation of vectors in what is known as vector space (also known as linear space). Vector spaces can be defined using many different types of numbers, such as real numbers, complex numbers, rational numbers, or numbers in a finite field. However, in elementary linear algebra, we typically work with vector spaces whose entries are real numbers denoted by \( \mathbb{R}^{n} \), where \( \mathbb{R} \) represents real numbers and \( n \) represents the dimension. For example \( \mathbb{R}^{2} \) would represent vector space in a 2D plane.</p>
+							<h3>What Defines a Vector?</h3>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g1.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g1.webp" alt="1.1g1.webp" width="200" height="165"/></a>A vector is defined as an object with magnitude (otherwise known as length) and direction. The following is an example of the vector \( a \) in \( \mathbb{R}^{2} \).</p>
+							<p>$$a = \begin{bmatrix}
+								4 \\
+								2
+								\end{bmatrix}$$</p>
+							<p>When a vector is written in this way, it is typically considered to be a position vector, originating at the origin, in this case, \( (0,0) \). The origin is also referred to as the zero vector. A vector can also be defined between two points. For example, \( \overrightarrow{BC} \) represents the vector pointing from point \( B \) to point \( C \), this is known as a displacement vector.</p>
+							<h3>Calculating The Magnitude</h3>
+							<p>The magnitude (or length) of the vector is expressed as \( \left\| a \right\| \). Finding the magnitude for vectors depends on thier type and dimension. For example, to find the magnitude of our above position vector \( a \) in \( \mathbb{R}^{2} \), we would use this formula:</p>
+							<p>$$\left\| a \right\| = \sqrt{x^{2}+y^{2}}$$</p>
+							<p>This computes to:</p>
+							<p>$$\left\| a \right\| = \sqrt{4^{2}+2^{2}} = \sqrt{16+4} = \sqrt{20} \approx 4.47$$</p>
+							<p>And to find the magnitude of our above displacement vector \( \overrightarrow{BC} \) in \( \mathbb{R}^{2} \), we can use the equation:</p>
+							<p>$$\left\| \overrightarrow{BC} \right\| = \sqrt{(x_{2}-x_{1})^{2} + (y_{2}-y_{1})^{2}}$$</p>
+							<p>Computing to:</p>
+							<p>$$\left\| \overrightarrow{BC} \right\| = \sqrt{(5-1)^{2} + (1-3)^{2}} = \sqrt{(4)^{2} + (-2)^{2}} = \sqrt{16 + 4} = \sqrt{20} \approx 4.47$$</p>
+							<p>The same result! But if you look at our graph above you will notice that both vectors go across by 4 units and up by 2 units, resulting in the same length.</p>
+						</div>
+					</div>
+					<h1>Operations With Vectors</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Addition/Sum & Subtraction</h3>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g2.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g2.webp" alt="1.1g2.webp" width="300" height="247"/></a>Adding vectors combines two vectors to create a new one. Assuming you have \( a \) and \( b \) in \( \mathbb{R}^{n} \) the process for vector addition is as follows:</p>
+							<p>$$a + b = \begin{bmatrix}
+								a_{1} + b_{1} \\
+								a_{2} + b_{2} \\
+								\vdots \\
+								a_{n} + b_{n}
+								\end{bmatrix}$$</p>
+							<p>Rules of vector addition:</p>
+							<ul>
+								<li>Commutative: \( a + b = b + a \)</li>
+								<li>Associative: \( (a + b) + c = a + (b + c) \)</li>
+								<li>Zero vector: \( a + 0 = a \)</li>
+								<li>Inverse vector: \( a + (-a) = 0 \)</li>
+							</ul>
+							<p>Using this, let's add \( a \) and \( b \) from the graph to the right:</p>
+							<p>$$a + b = \begin{bmatrix}
+								2 + 3 \\
+								4 + 1
+								\end{bmatrix} = \begin{bmatrix}
+								5 \\
+								5
+								\end{bmatrix}$$</p>
+							<p>As you can see in the example the resulting position vector terminates at \( (5,5) \). Notice that this vector also forms the diagonal of the parallelogram defined by the two original vectors.</p>
+							<p>Additionally, vector subtraction is simply defined as:</p>
+							<p>$$a - b = a + (-b)$$</p>
+							<p>If \( a \) and \( b \) are position vectors then the resulting vector is the displacement vector from the tip of \( b \) to the tip of \( a \), or in other words \( \overrightarrow{BA} \).</p>
+							<h3>Multiplication/Scalars</h3>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g3.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g3.webp" alt="1.1g3.webp" width="300" height="247"/></a>Multiplying, or scaling, vectors multiplies the values of the vector by the scalar. Scalars are typically represented by \( \lambda \) where \( \lambda \in \mathbb{R} \). Assuming you have \( a \) in \( \mathbb{R}^{n} \) the process for vector scaling is as follows:</p>
+							<p>$$\lambda a = \begin{bmatrix}
+								\lambda a_{1} \\
+								\lambda a_{2} \\
+								\vdots \\
+								\lambda a_{n}
+								\end{bmatrix}$$</p>
+							<p>Rules of vector scaling:</p>
+							<ul>
+								<li>Associative: \( \lambda (\mu a)= (\lambda\mu) a \)</li>
+								<li>Zero vector/scalar: \( 0a = 0\; \) and \( \;0\lambda = 0 \)</li>
+								<li>Magnitude: \( \left\| \lambda a \right\| = \left| \lambda \right|\,||a|| \)</li>
+								<li>Distributive: \( \lambda (a + b) = \lambda a + \lambda b\; \) or \( \;(\lambda + \mu)a = \lambda a + \mu a \)</li>
+							</ul>
+							<p>Using this, let's multiply \( a \) from the graph to the right by a scalar of \( -\frac{3}{2} \):</p>
+							<p>$$-\frac{3}{2}a = \begin{bmatrix}
+								3 \:\cdot\: -\frac{3}{2} \\
+								1 \:\cdot\: -\frac{3}{2}
+								\end{bmatrix} = \begin{bmatrix}
+								-4.5 \\
+								-1.5
+								\end{bmatrix}$$</p>
+							<p>There is no standard way to divide vectors, however you can multiply by a scalar:</p>
+							<p>$$\frac{a}{\lambda} = \frac{1}{\lambda} a \text{, where } \lambda \neq 0$$</p>
+						</div>
+					</div>
+					<h1>The Unit Vector</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g4.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g4.webp" alt="1.1g4.webp" width="200" height="165"/></a>The unit vector is written as \( e \), where \( \left\| e \right\| = 1 \). The unit vector covers all axes of \( \mathbb{R}^{n} \):</p>
+							<p>$$e_{i} = (0,\; 0,\; ...,\; 1,\; ...,\; 0,\; 0) \text{, where the } i^{\text{th}} \text{ position = 1}$$</p>
+							<p>For example in \( \mathbb{R}^{2} \):</p>
+							<p>$$a = \begin{bmatrix}
+								4 \\
+								2
+								\end{bmatrix} \text{ and } b = (4e_{1} + 2e_{2}) \text{ then } a = b$$</p>
+							<h3>Normalization of Vectors</h3>
+							<p>When we 'normalize' a vector we are scaling the vector to have a length of 1, or in other words \( \left\| e \right\| \). We can do so like this:</p>
+							<p>$$\hat{a} = \frac{a}{\left\| a \right\|} \text{ where } \left\| e \right\| = \left\| \hat{a} \right\|$$</p>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g5.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g5.webp" alt="1.1g5.webp" width="200" height="165"/></a>Taking the second example from the right:</p>
+							<p>$$\left\| a \right\| = \sqrt{4^{2} + 3^{2}} = \sqrt{16 + 9} = \sqrt{25} = 5$$</p>
+							<p>$$\hat{a} = \frac{a}{5} = \frac{1}{5}a = \begin{bmatrix}
+								4 \:\cdot\: \frac{1}{5} \\
+								3 \:\cdot\: \frac{1}{5}
+								\end{bmatrix} = \begin{bmatrix}
+								\frac{4}{5} \\
+								\frac{3}{5}
+								\end{bmatrix}$$</p>
+							<p>You will now notice that in this example \( \left\| e \right\| = \left\| \hat{a} \right\| \) and we can prove this:</p>
+							<p>$$\left\| \hat{a} \right\| = \sqrt{0.8^{2} + 0.6^{2}} = \sqrt{0.64 + 0.36} = \sqrt{1} = 1 = \left\| e \right\|$$</p>
+						</div>
+					</div>
+					<h1>Linear Combinations</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A linear combination of vectors is when you multiply vectors by scalars and add them together:</p>
+							<p>$$b = \lambda_{1}a_{1} + \lambda_{2}a_{2}\;+\;...\;+\;\lambda_{n}a_{n}$$</p>
+							<p>Remember, standard unit vectors \( e_{1},\;e_{2},\;...,\;e_{n} \) are unit vectors along coordinate axes. Any vector \( a \in \mathbb{R}^{n} \) can be expressed as:</p>
+							<p>$$a = x_{1}e_{1} + x_{2}e_{2}\;+\;...\;+\;x_{i}e_{i}$$</p>
+							<p>Based on this, unit vectors simply indicate direction, where scalars indicate magnitude along that direction. Linear combinations allow vectors to be expressed in different bases <em>other</em> than standard unit vectors. Here's an example:</p>
+							<p>We have the vector \( a = 3e_{1} + 2e_{2} \) along with the other two vectors \( f1 \) and \( f2 \). Currently \( a \) is expressed in terms of the standard unit vectors, but say we want to express it in relation to the other two \( f \) vectors instead. We then want \( a \) to look like \( a = xf_{1} + yf_{2} \). For simplicitys sake we can express \( a \) as \( (3,2) = x(-1,3) + y(1,2) \), and we can then use this to set up the following component equations:</p>
+							<p>$$x(-1)+y(1) = 3 \text{ (x-component)}$$</p>
+							<p>$$x(3)+y(2) = 2 \text{ (y-component)}$$</p>
+							<p>This then simplifies down to:</p>
+							<p>$$-x + y = 3$$</p>
+							<p>$$3x + 2y = 2$$</p>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.1g6.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.1g6.webp" alt="1.1g6.webp" width="300" height="247"/></a>Next we want to solve this system of equations, we can do so by rearranging the x-component equation to be \( y = 3 + x \) then substituting it into the y-component and computing:</p>
+							<p>$$3x + 2(3 + x) = 2$$</p>
+							<p>$$3x + 6 + 2x = 2$$</p>
+							<p>$$5x + 6 = 2$$</p>
+							<p>$$5x = -4$$</p>
+							<p>$$x = -\frac{4}{5}$$</p>
+							<p>Then solve for \( y \):</p>
+							<p>$$y = 3 - \frac{4}{5}$$</p>
+							<p>$$y = \frac{15}{5} - \frac{4}{5}$$</p>
+							<p>$$y = \frac{11}{5}$$</p>
+							<p>Therefore the solution is:</p>
+							<p>$$a = -\frac{4}{5}f_{1} + \frac{11}{5}f_{2}$$</p>
+							<p>On our graph to the right both equations for \( a \) result in the <em>exact same</em> vector. They are simply different ways to express it.</p>
+							<p>$$a = \begin{bmatrix}
+								3 \\
+								2
+								\end{bmatrix} = 3e_{1} + 2e_{2} = -\frac{4}{5}f_{1} + \frac{11}{5}f_{2}$$</p>
+						</div>
+					</div>
+					<h1>Dependence</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Linear Dependence</h3>
+							<p>Vectors are linearly dependent if at least one vector can be written as a combination of the others. In other words, some vectors are multiples of each other. Mathematically linear dependence is defined as the following, <em>if</em> scalars exisit where at least one \( \lambda \neq 0 \) that satisfies:</p>
+							<p>$$\lambda_{1}a_{1} + \lambda_{2}a_{2}\;+\;...\;+\;\lambda_{n}a_{n} = 0$$</p>
+							<p>The following is an example of two linearly dependent vectors:</p>
+							<p>$$a = \begin{bmatrix}
+								1 \\
+								2
+								\end{bmatrix},\;b = \begin{bmatrix}
+								2 \\
+								4
+								\end{bmatrix}$$</p>
+							<p>And we know this because \( b = 2a \). At the same time according to the mathmatical definition above:</p>
+							<p>$$-2a + 1b = 0$$</p>
+							<p>$$-2\begin{bmatrix}
+								1 \\
+								2
+								\end{bmatrix}+1\begin{bmatrix}
+								2 \\
+								4
+								\end{bmatrix}=\begin{bmatrix}
+								-2 \\
+								-4
+								\end{bmatrix}+\begin{bmatrix}
+								2 \\
+								4
+								\end{bmatrix} = 0$$</p>
+							<p>Where our scalars -2 and 1 are both nonzero.</p>
+							<h3>Linear Independence</h3>
+							<p>Vectors are linearly independent if no vector can be written as a combination of the others. In other words, all vectors contribute something new, they cannot be written in terms of each other. Meaning that the only solution to the definition of dependence is setting all scalars equal zero:</p>
+							<p>$$0a_{1} + 0a_{2}\;+\;...\;+\;0a_{n} = 0$$</p>
+							<p>The following is an example of two linearly independent vectors:</p>
+							<p>$$a = \begin{bmatrix}
+								1 \\
+								0
+								\end{bmatrix},\;b = \begin{bmatrix}
+								0 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>And we know this because no multiple of \( b \) or \( a \) will equal the other vector.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
