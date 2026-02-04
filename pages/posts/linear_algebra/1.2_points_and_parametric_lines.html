@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Linear Algebra 1.2 - Points & Parametric Lines</title>
+		<meta name="description" content="For the purpose of better understanding my current linear algebra class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article explains endpoints, midpoints, intersecting points on lines, and introduces parametric lines.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Linear Algebra 1.2 - Points & Parametric Lines</h2>
+							<em class="date">2/4/2026</em>
+							<hr>
+							<p>This article is part of a series on linear algebra. Find more <a href="#">soon</a>.</p>
+							<p>1.2 explains endpoints, midpoints, intersecting points on lines, and introduces parametric lines.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/linear_algebra/3D-graph.webp" alt="3D-graph.webp" width="300" height="225"/>
+						</div>
+					</div>
+					<h1>Vector Endpoints</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g1.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g1.webp" alt="1.2g1.webp" width="300" height="247"/></a>To reiterate some concepts introduced in <a href="/pages/posts/linear_algebra/1.1_intro_to_vectors.html">1.1</a>:</p>
+							<ul>
+								<li>\( \overrightarrow{AB} = -a + b = b - a \)</li>
+								<li>\( \overrightarrow{BA} = -\overrightarrow{AB} = a - b \)</li>
+							</ul>
+							<p>Example:</p>
+							<p>$$a = \begin{bmatrix}
+								-1 \\
+								3
+								\end{bmatrix},\;b = \begin{bmatrix}
+								4 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>$$\overrightarrow{AB} = b - a = \begin{bmatrix}
+								4 \\
+								1
+								\end{bmatrix} - \begin{bmatrix}
+								-1 \\
+								3
+								\end{bmatrix} = \begin{bmatrix}
+								5 \\
+								-2
+								\end{bmatrix}$$</p>
+							<p>For this example keep in mind our resulting vector \( \overrightarrow{AB} \) is a displacement vector and <em>not</em> a position vector relative to the origin. This vector starts at point A, goes across 5 units then down 2 arriving at point B.</p>
+						</div>
+					</div>
+					<h1>Midpoints on a Line Segment</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>We want to find the midpoint \( M \) on the line segment \( \overrightarrow{AB} \). We can do this by finding the position vector \( m \), which could also be expressed as \( \overrightarrow{OM} \), where \( O \) is the origin. Remeber, position vectors are relative to the origin and express the final point the vector is arriving at from the origin. In this case we want to find:</p>
+							<p>$$m = \frac{1}{2}(a + b)$$</p>
+							<p>For posterity's sake, this can also be represented by:</p>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g2.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g2.webp" alt="1.2g2.webp" width="300" height="247"/></a>$$m = a + \frac{1}{2}(b - a)$$</p>
+							<p>$$= \frac{1}{2}a + \frac{1}{2}b$$</p>
+							<p>$$= \frac{1}{2}(a + b)$$</p>
+							<p>Note: we are adding \( a \) at the start in order to get the position vector (relative to the origin), without it, we would be getting the displacement vector originating from point \( A \)... Now let's solve:</p>
+							<p>$$m = \frac{1}{2}\left( \begin{bmatrix}
+								-1 \\
+								3
+								\end{bmatrix} + \begin{bmatrix}
+								4 \\
+								1
+								\end{bmatrix} \right) = \frac{1}{2}\begin{bmatrix}
+								3 \\
+								4
+								\end{bmatrix} = \begin{bmatrix}
+								\frac{3}{2} \\
+								2
+								\end{bmatrix}$$</p>
+							<p>Note that the point \( M \) is also the center of gravity for the line segment \( \overrightarrow{AB} \).</p>
+						</div>
+					</div>
+					<h1>Points on a Line Segment</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g3.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g3.webp" alt="1.2g3.webp" width="300" height="247"/></a>We can find the displacement vector originating from point \( A \) for any point \( P \) on the line segment \( \overrightarrow{AB} \) by calculating:</p>
+							<p>$$\overrightarrow{AP} = \lambda\:\overrightarrow{AB},\;\;0\le\lambda\le1$$</p>
+							<p>Then using the same steps from our last example about midpoints we know that:</p>
+							<p>$$p = a + \lambda(b - a)$$</p>
+							<p>Let's do an example where we find the point \( P \) which is \( \frac{1}{4} \) the way down the line segment \(\overrightarrow{AB}\):</p>
+							<p>$$\begin{bmatrix}
+								-8 \\
+								8
+								\end{bmatrix} + \frac{1}{4}\left( \begin{bmatrix}
+								8 \\
+								4
+								\end{bmatrix} - \begin{bmatrix}
+								-8 \\
+								8
+								\end{bmatrix}\right) = \begin{bmatrix}
+								-8 \\
+								8
+								\end{bmatrix} + \frac{1}{4}\begin{bmatrix}
+								16 \\
+								-4
+								\end{bmatrix} = \begin{bmatrix}
+								-8 \\
+								8
+								\end{bmatrix} + 1\begin{bmatrix}
+								4 \\
+								-1
+								\end{bmatrix} = \begin{bmatrix}
+								-4 \\
+								7
+								\end{bmatrix}$$</p>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g4.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g4.webp" alt="1.2g4.webp" width="300" height="247"/></a>Theres another cool trick we can do using the same equation. Say we want to divide the line segment into 7 equal chunks, and place point \( P \) 2 units away from \( A \) and 5 from \( B \). Keep in mind, when I say units I am <em>not</em> referring to units on the graph. Essentially:</p>
+							<p>$$\frac{\left\| \overrightarrow{AP} \right\|}{\left\| \overrightarrow{PB} \right\|} = \frac{2}{5}$$</p>
+							<p>However, we cannot simply use \( \frac{2}{5} \) as our scalar. We must instead calculate it as \( \frac{2}{7} \), as in 2 pieces out of the total 7. Let's compute:</p>
+							<p>$$\begin{bmatrix}
+								-1 \\
+								0
+								\end{bmatrix} + \frac{2}{7}\left( \begin{bmatrix}
+								13 \\
+								7
+								\end{bmatrix} - \begin{bmatrix}
+								-1 \\
+								0
+								\end{bmatrix}\right) = \begin{bmatrix}
+								-1 \\
+								0
+								\end{bmatrix} + \frac{2}{7}\begin{bmatrix}
+								14 \\
+								7
+								\end{bmatrix} = \begin{bmatrix}
+								-1 \\
+								0
+								\end{bmatrix} + 2\begin{bmatrix}
+								2 \\
+								1
+								\end{bmatrix} = \begin{bmatrix}
+								3 \\
+								2
+								\end{bmatrix}$$</p>
+							<p>It can be somewhat confusing to differentiate these two operations as they use the same equation and in cases can even result in the same point. In short:</p>
+							<ul>
+								<li>The first example is finding what percent of the way down a line segment a point is</li>
+								<li>The second example is divvying up the line segment into equal parts, and then we choose how many of those parts we want on either end of the point and solve</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Parametric Representation of a Straight Line</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g5.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g5.webp" alt="1.2g5.webp" width="300" height="247"/></a>A line is comprised of two parts:</p>
+							<ul>
+								<li>A point</li>
+								<li>A vector with direction</li>
+							</ul>
+							<p>If point \( P_{2} \) was an arbitrary point on the line in the graph to the right, then:</p>
+							<p>$$\overrightarrow{AP_{2}} = \lambda v,\;\lambda\in\mathbb{R}$$</p>
+							<p>$$\text{Ex: }\overrightarrow{AP} = 3v$$</p>
+							<p>The equation for a line in \( \mathbb{R}^{2} \) is:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} = a + \lambda v,\;\lambda\in\mathbb{R}$$</p>
+							<p>Here, \( A \) is a fixed point on the line, \( v \) is a direction vector, and \( \lambda \) is a real scalar. For any value of \( \lambda \), \( a + \lambda v \) gives the coordinates of a point on the line. We can write the equation for the line in our graph with:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} = \begin{bmatrix}
+								1 \\
+								5
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								2 \\
+								-1
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p><strong>Important:</strong> observe that \( v \) is <em>not</em> a position vector, but a displacement vector written with respect to point \( A \) in the equation.</p>
+						</div>
+					</div>
+					<h1>Intercept Point Between Two Lines \( (\mathbb{R}^{3}) \)</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.2g6.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.2g6.webp" alt="1.2g6.webp" width="300" height="247"/></a>Let's do our first example in \( \mathbb{R}^{3} \) (couldn't be bothered to make a 3D graph before). We have two lines and want to find if they intersect, and if so where:</p>
+							<p>$$L_{1}:\begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = \begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix} + \lambda_{1}\begin{bmatrix}
+								2 \\
+								1 \\
+								1
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p>$$L_{2}:\begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = \begin{bmatrix}
+								6 \\
+								3 \\
+								4
+								\end{bmatrix} + \lambda_{2}\begin{bmatrix}
+								1 \\
+								-2 \\
+								1
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p>To find if the lines intersect we have to check whether there exist scalars \( \lambda_{1},\;\lambda_{2}\in \mathbb{R} \) such that the position vectors of the lines are equal:</p>
+							<p>$$a_{1} + \lambda_{1} v_{1} = a_{2} + \lambda_{2}v_{2}$$</p>
+							<p>We can start by writing a system of equations for each dimension of both lines:</p>
+							<p>$$\text{Line 1:}\;\; x_{1} = 1 + 2\lambda_{1},\;\;y_{1} = 3 + \lambda_{1},\;\;z_{1} = 1 + \lambda_{1}$$</p>
+							<p>$$\text{Line 2:}\;\; x_{2} = 6 + \lambda_{2},\;\;y_{2} = 3 -2\lambda_{2},\;\;z_{2} = 4 + \lambda_{2}$$</p>
+							<p>Set them equal to each other:</p>
+							<p>$$\left\{ \begin{matrix}
+								1 + 2\lambda_{1} = 6 + \lambda_{2}\quad(x) \\
+								3 + \lambda_{1} = 3 -2\lambda_{2}\quad(y) \\
+								1 + \lambda_{1} = 4 + \lambda_{2}\quad\;\;(z)
+								\end{matrix} \right.$$</p>
+							<p>Start simplifying:</p>
+							<p>$$\lambda_{2} = 2\lambda_{1} - 5\quad(x)$$</p>
+							<p>$$\lambda_{1} = -2\lambda_{2}\quad(y)$$</p>
+							<p>$$\lambda_{1} = 3 + \lambda_{2}\quad(z)$$</p>
+							<p>Substitute the \( x \) equation result into the simplified \( y \) equation:</p>
+							<p>$$\lambda_{1} = -2(2\lambda_{1} - 5)\quad(y)$$</p>
+							<p>$$\lambda_{1} = -4\lambda_{1} + 10\quad(y)$$</p>
+							<p>$$5\lambda_{1} = 10\quad(y)$$</p>
+							<p>$$\lambda_{1} = 2\quad(y)$$</p>
+							<p>Substitute result back into the \( x \) equation to get \( \lambda_{2} \):</p>
+							<p>$$\lambda_{2} = 2(2) - 5\quad(x)$$</p>
+							<p>$$\lambda_{2} = 4 - 5\quad(x)$$</p>
+							<p>$$\lambda_{2} = -1\quad(x)$$</p>
+							<p>Now let's put these two scalars into the \( z \) equation to confirm we did everything right:</p>
+							<p>$$(2) = 3 + (-1)\quad(z)$$</p>
+							<p>$$2 = 2\quad(z)$$</p>
+							<p>All three equations have been satisfied confirming that an intersect point exists. We can now use either scalar to solve its respective equation to find the intersect point:</p>
+							<p>$$\begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix} + 2\begin{bmatrix}
+								2 \\
+								1 \\
+								1
+								\end{bmatrix} = \begin{bmatrix}
+								5 \\
+								5 \\
+								3
+								\end{bmatrix}\quad\text{OR}\quad\begin{bmatrix}
+								6 \\
+								3 \\
+								4
+								\end{bmatrix} + -1\begin{bmatrix}
+								1 \\
+								-2 \\
+								1
+								\end{bmatrix} = \begin{bmatrix}
+								5 \\
+								5 \\
+								3
+								\end{bmatrix}$$</p>
+						</div>
+					</div>
+					<h1>Extra Practice</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>$$\text{Let }L:\begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = \begin{bmatrix}
+								2 \\
+								1 \\
+								-4
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<h3>Find a Different Equation for the Line</h3>
+							<p>We can do this by simply first finding another point on the line, then multiplying the given equation's vector by a scalar. Let's use \( \lambda = 5 \):</p>
+							<p>$$\begin{bmatrix}
+								2 \\
+								1 \\
+								-4
+								\end{bmatrix} + 5\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix} = \begin{bmatrix}
+								7 \\
+								-4 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>We can now replace \( a \) in the original equation with this new point and for extra measure scale the vector as well:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = \begin{bmatrix}
+								7 \\
+								-4 \\
+								1
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								5 \\
+								-5 \\
+								5
+								\end{bmatrix}$$</p>
+							<h3>Do Specified Points Exist on the Line?</h3>
+							<p>Let's find if the points \( P_{1} = (19, -16, 13) \) and \( P_{2} = (5, 8, 15) \) exist on the line. To do this we just solve the equation and see if there is a scalar to satisfy the given coordinates:</p>
+							<p>$$\begin{bmatrix}
+								19 \\
+								-16 \\
+								13
+								\end{bmatrix} = \begin{bmatrix}
+								2 \\
+								1 \\
+								-4
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>$$\begin{bmatrix}
+								17 \\
+								-17 \\
+								17
+								\end{bmatrix} = \lambda\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>$$\lambda = 17$$</p>
+							<p>This shows \( P_{1} \) does exist on the line. Let's try the other point</p>
+							<p>$$\begin{bmatrix}
+								5 \\
+								8 \\
+								15
+								\end{bmatrix} = \begin{bmatrix}
+								2 \\
+								1 \\
+								-4
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>$$\begin{bmatrix}
+								3 \\
+								7 \\
+								19
+								\end{bmatrix} = \lambda\begin{bmatrix}
+								1 \\
+								-1 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>There is no scalar which satifies this, so \( P_{2} \) does not lie on this line.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
