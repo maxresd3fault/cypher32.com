@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Linear Algebra 1.3 - Dot Product, ON Basis & Planes</title>
+		<meta name="description" content="For the purpose of better understanding my current linear algebra class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the dot product, the orthonormal basis, and planes.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Linear Algebra 1.3 - Dot Product, ON Basis & Planes</h2>
+							<em class="date">3/19/2026</em>
+							<hr>
+							<p>This article is part of a series on linear algebra. Find more <a href="#">soon</a>.</p>
+							<p>1.3 introduces the dot product, the orthonormal basis, and planes.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/linear_algebra/3D-graph.webp" alt="3D-graph.webp" width="300" height="225"/>
+						</div>
+					</div>
+					<h1>The Dot Product</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g1.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g1.webp" alt="1.3g1.webp" width="300" height="247"/></a>The dot product is the product of the magnitude of two vectors and the cosine of the angle between them. It is defined as:</p>
+							<p>$$u\circ v = \|u\|\|v\| \cos(\varphi) \in \mathbb{R}$$</p>
+							<p>It is a way to combine two vectors and get one number out. Geometrically, that output number tells us how much two vectors point in the same direction.</p>
+							<ul>
+								<li>If \( u \circ v \gt 0 \) than \( \varphi \) is acute</li>
+								<li>If \( u \circ v = 0 \) than both vectors are orthogonal (perpendicular), which is written as \( u \perp v \)</li>
+								<li>If \( u \circ v \lt 0 \) than \( \varphi \) is obtuse</li>
+							</ul>
+							<p>Some rules the dot product obeys:</p>
+							<ul>
+								<li>\( u \circ v = v \circ u \)</li>
+								<li>\( (\lambda u) \circ v = \lambda (u \circ v) = u \circ (\lambda v) \)</li>
+								<li>\( u' \circ v = u \circ v \)</li>
+							</ul>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g2.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g2.webp" alt="1.3g2.webp" width="300" height="247"/></a>Let's pause on the rules to look at that last one a bit closer. If we were to project \( u \) onto \( v \), expressed as \( u' = \text{proj}_{v}(u) \)<sup>*</sup>, then according to our graph that projection of \( u \) onto \( v \) would be the vector along \( v \) whose dot product with \( v \) is the same as \( u \circ v \). For clarification, \( u' \) is <em>not</em> a displacement vector, it is relative to the origin. This rule applies to scalars too!</p>
+							<p>$$(\lambda v) \circ u = (\lambda u)' \circ v = \lambda u' \circ v = \lambda(u \circ v)$$</p>
+							<p>Let's continue with more rules:</p>
+							<ul>
+								<li>\( u \circ u = \left\| u \right\|^{2} \)</li>
+								<li>\( u \circ (v + w) = u \circ v + u \circ w \)</li>
+							</ul>
+							<p><sup>*</sup>Projections are defined as:</p>
+							<p>$$ \text{proj}_{v}(u) = \frac{u \circ v}{\left\| v \right\|^{2}}v \quad\text{OR}\quad \text{proj}_{v}(u) = \frac{u \circ v}{v \circ v}v$$</p>
+						</div>
+					</div>
+					<h1>The Dot Product in an Orthonormal Basis</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g3.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g3.webp" alt="1.3g3.webp" width="300" height="247"/></a>The orthonormal basis (also known as the ON basis) describes a standardized coordinate system in which the unit vectors, \(e_{1} \) and \( e_{2} \) (for \( \mathbb{R}^{2} \)) , are normalized (have a magnitude of 1) and are perfectly orthogonal to each other:</p>
+							<p>$$\begin{cases} 
+								e_{1} \perp e_{2} & \text{(ortho)} \\
+								\| e_{1} \| = \| e_{2} \| = 1 & \text{(normal)}
+								\end{cases}$$</p>
+							<p>$$e_{i} \circ e_{j} = \begin{cases} 
+								1, & i = j \\
+								0, & i \neq j
+								\end{cases}$$</p>
+							<p>In short, the ON basis is just the standard coordinate system you've been using since middle school. And we can safely assume that any vector, unless otherwise specified, is relative to the ON basis. Let's try now to solve a problem using the dot product in this basis. Let's find if the angle between \( u \) and \( v \) is acute or obtuse:</p>
+							<p>$$u \circ v = (2e_{1}+3e_{2}) \circ (3e_{1}-3e_{2})$$</p>
+							<p>We can start by expanding the parentheses and solving based on our definition of the ON basis and the rules for the dot product from above, this gives us four terms:</p>
+							<p>$$2e_{1} \circ 3e_{1} = 6(e_{1} \circ e_{1}) = 6(1) = 6$$</p>
+							<p>$$2e_{1} \circ -3e_{2} = -6(e_{1} \circ e_{2}) = -6(0) = 0$$</p>
+							<p>$$3e_{2} \circ 3e_{1} = 9(e_{2} \circ e_{1}) = 9(0) = 0$$</p>
+							<p>$$3e_{2} \circ -3e_{2} = -9(e_{2} \circ e_{2}) = -9(1) = -9$$</p>
+							<p>We then sum these numbers up and get our dot product result:</p>
+							<p>$$6+0+0+-9=-3$$</p>
+							<p>But! There is a faster way to do this (only in the ON basis with orthogonal unit vectors)*, we can simply take our two vectors we want to find the dot product of and multiply across then sum the results:</p>
+							<p>$$u \circ v = \begin{bmatrix}
+								2 \\
+								3
+								\end{bmatrix} \circ \begin{bmatrix}
+								3 \\
+								-3
+								\end{bmatrix}$$</p>
+							<p>$$2 \cdot 3 + 3(-3) = 6 + -9 = -3$$</p>
+							<p>And finally getting back to our original question, \( -3 \lt 0 \), so we can deduce that the angle between the two vectors is obtuse. You can of course confirm this by looking at the graph above.</p>
+							<p>*This trick can be applied to any vectors in \( \mathbb{R}^{n} \) in an ON basis:</p>
+							<p>$$u \circ v = \begin{bmatrix}
+								x_{1} \\
+								x_{2} \\
+								\vdots \\
+								x_{n}
+								\end{bmatrix} \circ \begin{bmatrix}
+								y_{1} \\
+								y_{2} \\
+								\vdots \\
+								y_{n}
+								\end{bmatrix} = \sum_{k=1}^{n}x_{k}y_{k}$$</p>
+						</div>
+					</div>
+					<h1>Distance & Angle Practice</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g4.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g4.webp" alt="1.3g4.webp" width="300" height="247"/></a>Let's now use what we've learned thus far to solve a practical example. We want to solve for the distance between points \( A \) and \( B \) and also the angle of \( \varphi \). We already learned how to calculate the magnitude of displacement vectors in <a href="/pages/posts/linear_algebra/1.1_intro_to_vectors.html">1.1</a>. As for \( \varphi \) we can rearrange the dot product equation from above to solve for \( \cos(\varphi) \):</p>
+							<p>$$\begin{cases}
+								\text{dist}(A,B) & = || \overrightarrow{AB} || = || b - a || \\
+								& = || \overrightarrow{BA} || = || a - b || \\
+								\cos(\varphi) & = \frac{a \:\circ\: b}{||a||\:||b||}
+								\end{cases}$$</p>
+							<p>Let's start with solving for the distance:</p>
+							<p>$$|| \overrightarrow{BA} || = \sqrt{(9-4)^{2} + (0-6)^{2}} = \sqrt{(5)^{2} + (-6)^{2}} = \sqrt{25 + 36} = \sqrt{61} \approx 7.81$$</p>
+							<p>Now the angle:</p>
+							<p>$$\cos(\varphi) = \frac{\begin{bmatrix}
+								9 \\
+								0
+								\end{bmatrix} \circ \begin{bmatrix}
+								4 \\
+								6
+								\end{bmatrix}}{(\sqrt{9^{2}+0^{2}})(\sqrt{4^{2}+6^{2}})} = \frac{36}{(\sqrt{81+0})(\sqrt{16+36})} = \frac{36}{(\sqrt{81})(\sqrt{52})} = \frac{36}{9\sqrt{52}}$$</p>
+							<p>We can keep simplifying:</p>
+							<p>$$\cos(\varphi) = \frac{36}{9\sqrt{52}} = \frac{4}{\sqrt{52}} = \frac{4}{2\sqrt{13}} = \frac{2}{\sqrt{13}} \approx 0.5547$$</p>
+							<p>Now we compute the actual angle of \( \varphi \) with the inverse cosine:</p>
+							<p>$$\arccos\left( \frac{2}{\sqrt{13}} \right) \approx 56.3^{\circ}$$</p>
+						</div>
+					</div>
+					<h1>Equation of a Plane in Normal Form \( (\mathbb{R}^{3}) \)</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g5.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g5.webp" alt="1.3g5.webp" width="300" height="247"/></a>A plane is comprised of two parts:</p>
+							<ul>
+								<li>An anchor point</li>
+								<li>A normal vector</li>
+							</ul>
+							<p>Here is how plane \( \pi \) would be defined, first we must meet these conditions:</p>
+							<p>$$\begin{cases}
+								A \in \pi \\
+								n \perp \overrightarrow{AP}
+								\end{cases}$$</p>
+							<p>Then we can define like so based off the graph:</p>
+							<p>$$\pi: n \circ \overrightarrow{AP}=0 \quad\text{OR}\quad  \pi: n \circ (p-a)=0$$</p>
+							<p>For this problem we will just pick some arbitrary numbers for the anchor point along with our vector \( n \):</p>
+							<p>$$A = (6,7,4) \quad n= \begin{bmatrix}
+								1 \\
+								-2 \\
+								3
+								\end{bmatrix}$$</p>
+							<p>Now, let's find the equation for the plane \( \pi \) through the point \( A \) orthogonal to the vector \( n \):</p>
+							<p>$$\pi: \begin{bmatrix}
+								1 \\
+								-2 \\
+								3
+								\end{bmatrix} \circ \left( \begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} - \begin{bmatrix}
+								6 \\
+								7 \\
+								4
+								\end{bmatrix} \right) = 0$$</p>
+							<p>We don't know the coordinates for \( P \) so we just write out \( x,y,z \), let's continue simplifying:</p>
+							<p>$$\pi: \begin{bmatrix}
+								1 \\
+								-2 \\
+								3
+								\end{bmatrix} \circ \begin{bmatrix}
+								x - 6 \\
+								y - 7 \\
+								z - 4
+								\end{bmatrix} = 0$$</p>
+							<p>$$\pi: 1(x-6)+(-2)(y-7)+3(z-4)=0$$</p>
+							<p>$$\pi: x-6-2y+14+3z-12=0$$</p>
+							<p>$$\pi: x-2y+3z+(-6+14-12)=0$$</p>
+							<p>$$\pi: x-2y+3z-4=0$$</p>
+							<p>$$\pi: x-2y+3z=4$$</p>
+							<p>We now have the equation for our plane. As an example we can use it to check if point \( Q = (1,0,1) \) lies in the plane or not:</p>
+							<p>$$\pi: (1)-2(0)+3(1)=4$$</p>
+							<p>$$\pi: 1+3=4$$</p>
+							<p>$$\pi: 4=4$$</p>
+							<p>This confirms point \( Q \) is a part of the plane.</p>
+						</div>
+					</div>
+					<h1>Intercept Point Between a Plane & a Line \( (\mathbb{R}^{3}) \)</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g6.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g6.webp" alt="1.3g6.webp" width="300" height="247"/></a>Let's find the intercept point of the line \( L \) and the plane \( \pi \) given:</p>
+							<p>$$L: \begin{bmatrix}
+								x \\
+								y \\
+								z
+								\end{bmatrix} = \begin{bmatrix}
+								2 \\
+								5 \\
+								-1
+								\end{bmatrix} + \lambda\begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p>$$\pi: x+y-2z=5$$</p>
+							<p>Mathematically we are trying to figure out if we can satisfy this for the hypothetical intersect point \( P \):</p>
+							<p>$$\begin{cases}
+								P \in L: & P \;= \begin{bmatrix}
+								2 \\
+								5 \\
+								-1
+								\end{bmatrix} + \lambda \begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix} \\
+								P \in \pi: & P \;\circ \begin{bmatrix}
+								1 \\
+								1 \\
+								-2
+								\end{bmatrix} = 5
+								\end{cases}$$</p>
+							<p>With this we can then setup the problem like so:</p>
+							<p>$$\begin{bmatrix}
+								1 \\
+								1 \\
+								-2
+								\end{bmatrix} \circ \left( \begin{bmatrix}
+								2 \\
+								5 \\
+								-1
+								\end{bmatrix} + \lambda \begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix} \right) = 5$$</p>
+							<p>Now all we must do and solve and see if there exists a scalar \( \lambda \) which satisfies this:</p>
+							<p>$$\begin{bmatrix}
+								1 \\
+								1 \\
+								-2
+								\end{bmatrix} \circ \begin{bmatrix}
+								2 + \lambda \\
+								5 + 3\lambda \\
+								-1 + \lambda
+								\end{bmatrix} = 5$$</p>
+							<p>$$1(2+\lambda)+1(5+3\lambda)+(-2)(-1+\lambda)=5$$</p>
+							<p>$$2+\lambda+5+3\lambda+2-2\lambda=5$$</p>
+							<p>$$(\lambda+3\lambda-2\lambda)+(2+5+2)=5$$</p>
+							<p>$$2\lambda+9=5$$</p>
+							<p>$$2\lambda=-4$$</p>
+							<p>$$\lambda=-2$$</p>
+							<p>Indeed there is a scalar which satisfies both. We can now plug \( -2 \) back into the line equation to find the intersect point:</p>
+							<p>$$P = \begin{bmatrix}
+								2 \\
+								5 \\
+								-1
+								\end{bmatrix} -2\begin{bmatrix}
+								1 \\
+								3 \\
+								1
+								\end{bmatrix}$$</p>
+							<p>$$P = \begin{bmatrix}
+								2 \\
+								5 \\
+								-1
+								\end{bmatrix} -\begin{bmatrix}
+								2 \\
+								6 \\
+								2
+								\end{bmatrix}$$</p>
+							<p>$$P = \begin{bmatrix}
+								0 \\
+								-1 \\
+								-3
+								\end{bmatrix}$$</p>
+							<p>We have found the intersect point! The last thing we can do now is double check that \( P \in \pi \) just as we learned how to do at the end of the last section:</p>
+							<p>$$\pi: 0+(-1)-2(-3)=5$$</p>
+							<p>$$\pi: -1+6=5$$</p>
+							<p>$$\pi: 5=5$$</p>
+							<p>Increadible.</p>
+						</div>
+					</div>
+					<h1>Do Points Lie on the Same Side of a Plane \( (\mathbb{R}^{3}) \)</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Let's find out if the line segment formed between the points \( B = (1,1,1) \) and \( C = (2,-3,-4) \) crosses the plane \( \pi: 2x-y+z=1 \).</p>
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g7.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g7.webp" alt="1.3g7.webp" width="300" height="247"/></a>This is actually a rather simple problem to solve; when plugging points into the equation of the plane, if they do not lie on the plane, positive numbers mean the point is on one side of the plane while negative numbers mean points are on the other side. We simply have to check if these two points are on opposite sides of the plane. Let's start with \( B \):</p>
+							<p>$$\pi: 2(1)-1+1=1$$</p>
+							<p>$$\pi: 2=1$$</p>
+							<p>$$\pi: 1=0$$</p>
+							<p>As you can see this point does not lie on the plane itself, and we got a positive number, 1, remember that. Now let's solve for \( C \):</p>
+							<p>$$\pi: 2(2)+3-4=1$$</p>
+							<p>$$\pi: 4+3-4=1$$</p>
+							<p>$$\pi: 3=1$$</p>
+							<p>$$\pi: 2=0$$</p>
+							<p>We got another positive number, meaning the line segment formed between the two points cannot possibly intersect with the plane as both points are on the same side of it. You can confirm this in the graph.</p>
+						</div>
+					</div>
+					<h1>The Equation of a Line in \( \mathbb{R}^{2} \) in Normal Form</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p><a target="_blank" href="/images/posts/linear_algebra/maxres/1.3g8.jpg"><img class="graph-right-a" src="/images/posts/linear_algebra/1.3g8.webp" alt="1.3g8.webp" width="300" height="247"/></a>In <a href="/pages/posts/linear_algebra/1.2_points_and_parametric_lines.html">1.2</a> we learned how to write the parametric equation for a line, but in \( \mathbb{R}^{2} \) we can also write the "normal" form for a line. This only applies for lines in \( \mathbb{R}^{2} \), as in \( \mathbb{R}^{3} \) this is the equation for a plane, keep this in mind as it can be confusing.</p>
+							<p>$$\begin{cases}
+								A \in L \\
+								n \perp \overrightarrow{AP}
+								\end{cases}$$</p>
+							<p>Then we can define like so based off the graph:</p>
+							<p>$$L: n \circ \overrightarrow{AP}=0 \quad\text{OR}\quad L: n \circ (p-a)=0$$</p>
+							<p>As you can tell this is the exact same equation and concept as 3D planes, and just like those we need an anchor point and a vector. Just don't forget what we are trying to represent with this, a 2D line or a 3D plane.</p>
+							<p>Let's pick some numbers for our anchor point and vector:</p>
+							<p>$$A = (3,8) \quad n= \begin{bmatrix}
+								6 \\
+								7
+								\end{bmatrix}$$</p>
+							<p>Now let's find the normal equation for the line \( L \) through the point \( A \) orthogonal to \( n \):</p>
+							<p>$$L: \begin{bmatrix}
+								6 \\
+								7
+								\end{bmatrix} \circ \left( \begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} - \begin{bmatrix}
+								3 \\
+								8
+								\end{bmatrix} \right) = 0$$</p>
+							<p>$$L: \begin{bmatrix}
+								6 \\
+								7
+								\end{bmatrix} \circ \begin{bmatrix}
+								x-3 \\
+								y-8
+								\end{bmatrix} = 0$$</p>
+							<p>$$L: 6(x-3)+7(y-8) = 0$$</p>
+							<p>$$L: 6x-18+7y-56 = 0$$</p>
+							<p>$$L: 6x+7y = 74$$</p>
+							<p>And that's our normal form equation for the line!</p>
+							<h3>Converting Between Normal Form and Parametric Form</h3>
+							<p>Let's convert this normal form line to parametric form. As a refresher here is how the parametric form is defined:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} = A + \lambda v,\;\lambda\in\mathbb{R}$$</p>
+							<p>We start by finding the normal vector which is defined by the coefficients of the normal equation, here that is 6 and 7 so we already know:</p>
+							<p>$$n= \begin{bmatrix}
+								6 \\
+								7
+								\end{bmatrix}$$</p>
+							<p>We now want to find the direction vector, \( v \), which is orthogonal to \( n \). As a general rule of thumb in \( \mathbb{R}^{2} \):</p>
+							<p>$$\begin{bmatrix}
+								a \\
+								b
+								\end{bmatrix} \circ \begin{bmatrix}
+								b \\
+								-a
+								\end{bmatrix} = 0$$</p>
+							<p>Remember, a dot product result of 0 means the two vectors are orthogonal. So to find the vector orthogonal to \( n \) we can simply flip its two values and negate the bottom one:</p>
+							<p>$$n= \begin{bmatrix}
+								6 \\
+								7
+								\end{bmatrix} \quad\Longrightarrow\quad v = \begin{bmatrix}
+								7 \\
+								-6
+								\end{bmatrix}$$</p>
+							<p>Let's pause, currently we have:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} = A + \lambda \begin{bmatrix}
+								7 \\
+								-6
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p>All we need to find now is \( A \) which is simply a point that exists on the line. We already have our anchor point of \( A = (3,8) \) from before so we can just use that. However if we didn't start out with that you could just plug 0 in for both \( x \) and \( y \) and solve for that point. This finally yields the parametric equation:</p>
+							<p>$$L:\begin{bmatrix}
+								x \\
+								y
+								\end{bmatrix} = \begin{bmatrix}
+								3 \\
+								8
+								\end{bmatrix} + \lambda \begin{bmatrix}
+								7 \\
+								-6
+								\end{bmatrix},\;\lambda\in\mathbb{R}$$</p>
+							<p>And as for converting from parametric to normal you can just do the opposite steps to find \( n \) from \( v \), then follow the original steps for finding normal form from above.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
