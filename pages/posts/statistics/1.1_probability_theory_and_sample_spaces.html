@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 1.1 - Probability Theory & Sample Spaces</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces probability theory, sample spaces, events, and set notation.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 1.1 - Probability Theory & Sample Spaces</h2>
+							<em class="date">4/16/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>1.1 introduces probability theory, sample spaces, events, and set notation.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Probability Theory</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Probability theory is the main foundation for the study of statistics. It can be described as the mathematical framework to study randomness. Randomness in other words can be synonymous with unpredictability, which in turn arises from a lack of information.</p>
+							<p>There are two main definitions of probability:</p>
+							<h3>Frequentist Probability</h3>
+							<p>This model suggests that probability isn't just a hunch, rather it is the natural settling point of an experiment. This can be shown with a limit:</p>
+							<p>$$p=\lim_{n \to \infty} \frac{s_{n}}{n}$$</p>
+							<ul>
+								<li>\( n \): The total number of attempts</li>
+								<li>\( s_{n} \): The number of succesful attempts</li>
+								<li>\( \frac{s_{n}}{n} \): The percentage of successes at any given moment, known as the relative frequency (this fraction is also expressed as \( f_{n} \))</li>
+							</ul>
+							<p>As \( n \) gets larger (approaches infinity) the fluctuation in the result gets smaller and eventually you will land on a specific probability (\( p \)).</p>
+							<p>For a practical example; insurance companies examine thousands upon thousands of car accidents to determine the \( p \) of a crash, which is how they then set your premiums.</p>
+							<h3>Bayesian Probability</h3>
+							<p>Also known as subjective probability or degree of belief, this model is more qualitative. It is used for one time events where we cannot run a trial/experiment, thus we also cannot calculate a relative frequency.</p>
+							<p>Imagine you are an investor. You are trying to determine the probability (\( p \)) that a new linear algebra tutoring center startup will be profitable within three years. There are three stages to this:</p>
+							<ul>
+								<li>The initial belief: Before you meet the founders, you know that in general most startups fail. Therefor your initial degree of belief in success is low.</li>
+								<li>Gathering new evidence: At this stage you start looking at new data points. With every new piece of information, your degree of belief likely shifts. For example, you discover there is a local Bulgarian linear algebra professor failing 80% of his students. You know now there is more demand for such a business.</li>
+								<li>The result: Your final probability isn't a <em>fact</em> proven by math, it's a representation of your current confidence based on the evidence you’ve gathered.</li>
+							</ul>
+							<p>The obvious downside of this model is that it's completely subjective, two different people might assign different probabilities to the same event.</p>
+						</div>
+					</div>
+					<h1>Sample Spaces</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A sample space (denoted as \( S \)) is a collection of all the possible outcomes from a random experiment. A random experiment is any process that has some randomness or uncertainty involved.</p>
+							<p>Some examples of sample spaces:</p>
+							<ul>
+								<li>Roll a die and mark the number down: \( S=\{1,2,3,4,5,6\} \)</li>
+								<li>The lifetime of a proton in seconds: \( S=[0,\infty) \)</li>
+								<li>The number of die rolls to get a six: \( S=\{1,2,3,\cdots\} \)</li>
+							</ul>
+							<h3>Types of Sample Spaces</h3>
+							<p>There are three types of sample spaces based on the number of elements contained in it (known as cardinality):</p>
+							<ul>
+								<li>Finite</li>
+								<li>Uncountable</li>
+								<li>Infinitely countable</li>
+							</ul>
+							<p>These sample space types correspond to the examples above in order.</p>
+							<p>It is also possible to have non-numerical sample spaces which consist of non-numerical outcomes. For example:</p>
+							<ul>
+								<li>Toss a coin twice, mark the outcomes by H for heads and T for tails: \( S=\{HH,HT,TH,TT\} \)</li>
+								<li>The linear algebra tutoring center's success: \( S=\{\text{Turns a profit},\text{Does not turn a profit}\} \)</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Events</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>An event is defined as a subset of the sample space. But don't confuse events with outcomes, outcomes are elements of the sample space.</p>
+							<p>For example let's use the coin toss experiment to demonstrate this:</p>
+							<p>Let \( A \) be the event that both tosses in a try have the same result:</p>
+							<p>$$A=\{HH,TT\}$$</p>
+							<p>\( A \) is the event but \( HH \) and \( TT \) are outcomes, not events on their own!</p>
+							<p><a target="_blank" href="/images/posts/statistics/maxres/celestial-sphere.jpg"><img class="graph-right-a" src="/images/posts/statistics/celestial-sphere.webp" alt="celestial-sphere.webp" width="300" height="247"/></a>Let's do another example, we will test the probability of a gamma ray burst originating from a location in the celestial sphere. The sample space is:</p>
+							<p>$$S=\{(x,y,z)\in\mathbb{R}^{3}|x^{2}+y^{2}+z^{2}=r^{2}\}$$</p>
+							<p>Then to narrow it down, let \( B \) be the event that the gamma ray burst originates from a source in the northern celestial hemisphere:</p>
+							<p>$$B=\{(x,y,z)\in S|z\ge 0\}$$</p>
+							<p>If we assume the distribution of gamma ray bursts is isotropic (equally likely to occur in any direction), then the probability of event \( B \) is the ratio of the surface area of the event space to the total sample space:</p>
+							<p>$$P(B)=\frac{\text{Surface Area}(B)}{\text{Surface Area}(S)}=\frac{2\pi r^{2}}{4\pi r^{2}}=0.5$$</p>
+							<p>This means there is a 50% chance that event \( B \) happens, or in other words, a 50% chance that any gamma ray burst detected will originate from the northern celestial hemisphere.</p>
+						</div>
+					</div>
+					<h1>Set Notation</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Set notation is the mathematical syntax used to group objects and define relationships between them. We have used set notation before in the linear algebra series but to a simpler extent. Statistics is much more reliant on set notation so we will do a brief introduction here:</p>
+							<ul>
+								<li>Universal set: \( U \)</li>
+								<li>Null set: \( \phi = \{\} \)</li>
+								<li>Union (or operator): \( A\cup B=\{x\in U|x\in A \text{ or }x\in B\} \)</li>
+								<li>Intersection (and operator): \( A\cap B=\{x\in U|x\in A\text{ and }x\in B\} \)</li>
+								<li>Complement (not operator): \( A^{c} = \bar{A} = \{x\in U|x\notin A\} \)</li>
+								<li>Difference: \( A\backslash B = \{x\in U|x\in A\text{ and }x\notin B\} \)</li>
+								<li>Distributive laws: \( \begin{aligned} (A\cup B)\cap C &=(A\cap C)\cup (B\cap C) \\ (A\cap B)\cup C &=(A\cup C)\cap (B\cup C) \end{aligned} \)</li>
+								<li>De Morgan’s laws: \( \begin{aligned} (A\cup B)^{c} &=A^{c}\cap B^{c} \\ (A\cap B)^{c} &=A^{c}\cup B^{c} \end{aligned} \)</li>
+							</ul>
+							<h3>Product of Sets</h3>
+							<p>$$A\times B=\{(a,b)|a\in A\text{ and }b\in B\}$$</p>
+							<p>For example, a random experiment consists of tossing a coin and rolling a die then noting the results. Then the sample space is:</p>
+							<p>$$\begin{aligned}
+								S &=\{(H,1),(H,6),(T,1),(T,6),\cdots \} \\
+								&=\{H,T\}\times \{1,2,3,4,5,6\}
+								\end{aligned}$$</p>
+							<h3>Union of a Sequence of Sets</h3>
+							<p>$$\bigcup_{k=1}^{n}A_{k}=A_{1}\cup A_{2}\cup \cdots \cup A_{n}$$</p>
+							<p>This combines all the values from a series of sets into one new set. Sets do not hold duplicate values, so think of it like merging multiple sets into one.</p>
+							<h3>Intersection of a Sequence of Sets</h3>
+							<p>$$\bigcap_{k=1}^{n}A_{k}=A_{1}\cap A_{2}\cap \cdots \cap A_{n}$$</p>
+							<p>This creates a new set containing only values which appeared in all of the sets in the sequence.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
