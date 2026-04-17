@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 1.2 - Axioms & Properties of Probability</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the axioms and properties of probability as well as the inclusion-exclusion formula.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 1.2 - Axioms & Properties of Probability</h2>
+							<em class="date">4/17/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>1.2 introduces the axioms and properties of probability as well as the inclusion-exclusion formula.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Axioms of Probability</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The Axioms of Probability are rules that dictate how we assign numerical values to the likelihood of events. As we've learned, in experiments we work within a sample space (\( S \)). We can denote the set of all possible events as \( \Omega \). A probability measure (\( P \)) is essentially used as a function that maps these events to real numbers. These probability 'functions' operate on three rules:</p>
+							<h3>Axiom of Non-Negativity</h3>
+							<p>For every event \( A \) in the set of all events (\( \Omega \)) the probability must be a non-negative value between 0 and 1:</p>
+							<p>$$0\le P(A)\le 1$$</p>
+							<p>In other words a positive percentage.</p>
+							<h3>Axiom of Certainty</h3>
+							<p>This axiom states that the probability of the entire sample space \( S \) is exactly 1.</p>
+							<p>$$P(S)=1$$</p>
+							<p>Because at least something must happen...</p>
+							<h3>Axiom of Additivity</h3>
+							<p>This is the most important rule for finding the probability of events. It says that for any sequence of events that have no outcomes in common (\( i\neq j, A_{i}\cap A_{j}=\phi \) - also known as pairwise disjoint events) the probability of their union is the sum of their individual probabilities (for \( n \) events):</p>
+							<p>$$P\left(\bigcup_{k=1}^{n}A_{k}\right) = \sum_{k=1}^{n}P(A_{k})$$</p>
+							<p>In short, this rule is used to calculate the probability of multiple events happening when those events cannot occur at the same time. It applies to both infinite sequences of events and finite sequences (\( n \) can be \( \infty \)).</p>
+						</div>
+					</div>
+					<h1>Properties of a Probability Measurement</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Going off the set notation we learned in the last article, let's now learn some new rules and symbols:</p>
+							<ul>
+								<li>\( P(\phi)=0 \)</li>
+								<li>\( P(A^{c})=1-P(A) \)</li>
+								<li>\( P(A\backslash B)=P(A)-P(A\cap B) \)</li>
+								<li>\( P(A\cup B)=P(A)+P(B)-P(A\cap B) \)</li>
+								<li>\( A\subseteq B \Leftrightarrow P(A)\le P(B) \)</li>
+							</ul>
+							<h3>In Practice</h3>
+							<p>Let's set up an experiment where we toss a coin twice. The sample space with all possible outcomes looks like this:</p>
+							<p>$$S=\{HH,HT,TH,TT\}$$</p>
+							<p>Let \( A \) be the event of having at least one heads, and let \( B \) be the event of having the same result both times:</p>
+							<p>$$A=\{HH,HT,TH\}$$</p>
+							<p>$$B=\{HH,TT\}$$</p>
+							<p>Now let's apply our properties from above, in terms of \( P(A) \) and \( P(B) \):</p>
+							<ul>
+								<li>The probability of no heads:<br>\( P(A^{c})=1-P(A) \)</li>
+								<li>The probability of at least one heads but two different results:<br>\( P(A\backslash B)=P(A)-P(A\cap B) \)</li>
+								<li>The probability of both heads or both same results:<br>\( P(A\cup B)=P(A)+P(B)-P(A\cap B) \)</li>
+							</ul>
+						</div>
+					</div>
+					<h1>The Inclusion-Exclusion Formula</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The inclusion-exclusion formula is the brother of the axiom of additivity. However it is instead used to find the probability of the union of multiple events that <em>may overlap</em>. When events are not disjoint (they can happen at the same time), simply adding their probabilities (like the additivity axiom) would double count the outcomes at their intersections.</p>
+							<p>The inclusion-exclusion formula is defined as (for \( n \) events):</p>
+							<p>$$\begin{aligned}P\left( \bigcup_{k=1}^{n}A_{k} \right) = \sum_{k=1}^{n}P(A_{k})-\sum_{j\lt k}^{}P(A_{j}\cap A_{k})+\sum_{i\lt j\lt k}^{}P(A_{i}\cap A_{j}\cap A_{k})-\cdots\\+(-1)^{n+1}P(A_{1}\cap A_{2}\cap \cdots \cap A_{n})\end{aligned}$$</p>
+							<p>I almost miss linear algebra.</p>
+							<p>To simplify things in English:</p>
+							<ul>
+								<li>Step 1: Add the individual probabilities of each event</li>
+								<li>Step 2: Subtract the probabilities of all possible intersections of two events (to remove the parts that were counted twice)</li>
+								<li>Step 3: Add back the probabilities of all possible intersections of three events (to replace parts that were removed too many times)</li>
+								<li>Step 4: Continue this alternating pattern until the intersection of all \( n \) events is reached</li>
+							</ul>
+							<p>We can also express this process with the set notation properties, for two events:</p>
+							<p>$$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$</p>
+							<p>Or for three events:</p>
+							<p>$$\begin{aligned}P(A\cup B\cup C)=P(A)+P(B)+P(C)-P(A\cap B)-P(B\cap C)-P(C\cap A)\\+P(A\cap B\cap C)\end{aligned}$$</p>
+							<p>The formula gets longer because the overlapping events become more complex. We subtract the double overlaps, but then we've also inadvertently subtracted the center (where all three events meet) too many times, so we have to add it back.</p>
+							<p>The formula continues to grow, alternating between adding and subtracting until we reach the intersection of all \( n \) events.</p>
+							<h3>In Practice</h3>
+							<p>Let's choose an integer between (and including) 1 to 100 at random. And let's setup the following events:</p>
+							<ul>
+								<li>A: the chosen number is odd</li>
+								<li>B: the chosen number is divisible by 5</li>
+								<li>C: the chosen number is divisible by 7</li>
+							</ul>
+							<p>Given all this, what is the probability that the chosen number is either odd or a multiple of 5 or 7? In other words, the probability the number falls into any of the three events, but remember, all three of these events can also be true at the same time.</p>
+							<p>Let's now define things mathematically:</p>
+							<ul>
+								<li>\( S=\{1,2,\cdots,100\} \)</li>
+								<li>\( P(A) = \frac{50}{100} = 0.5 \) (There are 50 odd numbers in the sample space)</li>
+								<li>\( P(B) = \frac{20}{100} = 0.2 \) (Numbers divisible by 5: \( 100/5=20 \) total)</li>
+								<li>\( P(C) = \frac{14}{100} = 0.14 \) (Numbers divisible by 7: \( 100/7\approx 14.28 \) then round down, 14 total)</li>
+							</ul>
+							<p>Odd AND divisible by 5:</p>
+							<p>$$A\cap B=\{5,15,25,35,45,55,65,75,85,95\}\text{ (10 total)}$$</p>
+							<p>$$P(A\cap B)=\frac{10}{100}=0.1$$</p>
+							<p>Divisible by 5 AND by 7:</p>
+							<p>$$B\cap C=\{35,70\}$$</p>
+							<p>$$P(B\cap C)=\frac{2}{100}=0.02$$</p>
+							<p>Odd AND divisible by 7:</p>
+							<p>$$A\cap C=\{7,21,35,49,63,77,91\}\text{ (7 total)}$$</p>
+							<p>$$P(A\cap C)=\frac{7}{100}=0.07$$</p>
+							<p>Odd AND Divisible by 5 AND by 7:</p>
+							<p>$$A\cap B\cap C=\{35\}$$</p>
+							<p>$$P(A\cap B\cap C)=\frac{1}{100}=0.01$$</p>
+							<p>Now we can put these probability values into the formula from above:</p>
+							<p>$$P(A\cup B\cup C)=0.5+0.2+0.14-0.1-0.02-0.07+0.01$$</p>
+							<p>$$P(A\cup B\cup C)=0.84-0.19+0.01$$</p>
+							<p>$$P(A\cup B\cup C)=0.66$$</p>
+							<p>Therefore the probability that the chosen number is either odd or a multiple of 5 or 7 is 66%.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
