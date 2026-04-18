@@ -78,12 +78,12 @@
 							<pre><code class="language-java">if(!world.isRemote && (metadata & 3) == 0 && world.rand.nextInt(200) == 0) {
  this.dropBlockAsItem_do(world, x, y, z, new ItemStack(Item.appleRed, 1, 0));
 }</code></pre>
-							<p>The first part of the if statement checks if we are in a singleplayer world (if not, the server runs this same code instead), then it checks the <code class="inline language-java">metadata</code> value to make sure it is an oak leaf block and not another tree type (like spruce or birch). The part we care about is the <code class="inline language-java">world.rand.nextInt(200) == 0</code>. Essentially it generates a random number that is greater than or equal to zero, but less than 200 (0-199). If and only if the number that was generated is 0, it then passes the if statement and drops an apple.</p>
+							<p>The first part of the if statement checks if we are in a singleplayer world (if not, the server runs this same code instead), then it checks the <code class="inline language-java">metadata</code> value to make sure it is an oak leaf block and not another tree type (like spruce or birch). The part we care about is the <code class="inline language-java">world.rand.nextInt(200) == 0</code>. Essentially it generates a random number that is greater than or equal to zero, but less than 200 (0-199). If, and only if, the number that was generated is 0, it then passes the if statement and drops an apple.</p>
 							<p>The important part is that we can assume <code class="inline language-java">world.rand.nextInt(200)</code> generates an integer that is equally likely to be any whole number from 0 to 199. Meaning, a uniform distribution. So, if \( A \) is the event an apple drops and \( S \) is the sample space of our random numbers:</p>
 							<p>$$S=\{0,1,\cdots,199\}\quad\left| S \right|=200$$</p>
 							<p>$$A=\{0\}\quad\left| A \right|=1$$</p>
 							<p>$$P(A)=\frac{1}{200}=0.005$$</p>
-							<p>Meaning there is a 0.05% chance an apple drops from any broken oak leaf block. A rather simple, but amusing example.</p>
+							<p>Meaning there is a 0.5% chance an apple drops from any broken oak leaf block. A rather simple, but amusing example.</p>
 						</div>
 					</div>
 				</div>
