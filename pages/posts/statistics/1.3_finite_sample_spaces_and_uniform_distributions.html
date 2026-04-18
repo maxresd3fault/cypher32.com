@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<link rel="stylesheet" href="/css/hljs.min.css"/>
+		<title>Cypher32 - Statistics 1.3 - Finite Sample Spaces & Uniform Distributions</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces finite sample spaces and uniform distributions.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 1.3 - Finite Sample Spaces & Uniform Distributions</h2>
+							<em class="date">4/18/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>1.3 introduces finite sample spaces and uniform distributions.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Finite Sample Spaces</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>In <a href="/pages/posts/statistics/1.1_probability_theory_and_sample_spaces.html">1.1</a> we introduced the three types of sample spaces (finite, uncountable & infinitely countable). Today we will take a closer look at finite sample spaces.</p>
+							<p>A finite sample space with \( n \) possible outcomes looks like:</p>
+							<p>$$S=\{s_{1},s_{2},\cdots,s_{n}\}$$</p>
+							<p>To fully understand how probabilities are assigned to this kind of space, we can look at two rules. Firstly, we assign a probability \( p_{k} \) for each outcome \( s_{k} \) such that:</p>
+							<p>$$0\le p_{k}\le 1\quad\forall^{*} k\in \{1,2,\cdots,n\}$$</p>
+							<p>Then according to the axiom of certainty all the probabilities must add up to 1:</p>
+							<p>$$\sum_{k=1}^{n}p_{k}=1$$</p>
+							<p>Once these conditions are met, the probability of any event \( A \) (which is a subset of \( S \)) can be calculated by adding up the probabilities of all the individual outcomes contained within that event:</p>
+							<p>$$P(A)=\sum_{k:s_{k}\in A}^{}p_{k}\quad$$</p>
+							<p>The set of probabilities \( \{p_{1},p_{2},\cdots,p_{n}\} \) is referred to as the probability distribution on \( S \).</p>
+							<p>*The \( \forall \) symbol is called the universal quantifier and read aloud as <em>for all/each</em>. It is used to clarify a property about every single member of a set.</p>
+							<h3>Uniform Distributions</h3>
+							<p>A uniform distribution means there is no bias in the outcomes, and that all the outcomes are equally likely to occur. For the finite sample space \( S=\{s_{1},s_{2},\cdots,s_{n}\} \), this would look like:</p>
+							<p>$$p_{k}=\frac{1}{n}\quad\forall k\in \{1,2,\cdots,n\}$$</p>
+							<p>For any event \( A \) that is a subset of \( S \), its probability is then the proportion of outcomes in \( S \) that are part of \( A \):</p>
+							<p>$$P(A)=\frac{\left| A \right|}{\left| S \right|}$$</p>
+							<p>Here the single vertical bars denote the cardinality of the set. As a reminder, we learned in <a href="/pages/posts/statistics/1.1_probability_theory_and_sample_spaces.html">1.1</a> that cardinality means the count of elements in a set.</p>
+							<p>At this point we should clarify that the term <em>random</em> is very often interpreted as all possible outcomes being equally likely (the uniform distribution). However, this is a specific case rather than an absolute rule. A process remains "random" as long as there is uncertainty in the result, <strong>even if</strong> that process follows a non-uniform or biased distribution where certain outcomes are more likely to occur than others.</p>
+						</div>
+					</div>
+					<h1>Examples</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Example 1</h3>
+							<p>Let's roll a fair die three times in a row and note the resulting sequence. We want to find out how likely it is to get the same numbers in all the three rolls. First let's define the sample space:</p>
+							<p>$$S=\{(1,1,1),(1,1,2),\cdots,(6,6,6)\}$$</p>
+							<p>Obviously that's a lot of possible outcomes. Let's figure out how many:</p>
+							<p>$$\left| S \right|=6\times6\times6=216$$</p>
+							<p>Let's now define event \( A \) for getting the same number all three rolls:</p>
+							<p>$$A=\{(1,1,1),(2,2,2),(3,3,3),(4,4,4),(5,5,5),(6,6,6)\}$$</p>
+							<p>And we can see that \( \left| A \right| =6 \). Since we are assuming a uniform distribution we just divide as we learned above:</p>
+							<p>$$P(A)=\frac{6}{216}\approx 0.0277$$</p>
+							<p>So the answer is a roughly 2.78% chance that the die will land on the same number three times in a row.</p>
+							<h3>Example 2</h3>
+							<p>We want to find out what the probability is of there being exactly two daughters in a family of three children. We will assume a uniform distribution (equal probability of a boy and girl at birth). We start again with defining the sample space:</p>
+							<p>$$S=\{BBB,BBG,BGB,BGG,GBB,GBG,GGB,GGG\}$$</p>
+							<p>For three children, there are \( 2\times2\times2=8 \) total possible outcomes. So \( \left| S \right|=8 \)</p>
+							<p>We are looking for the probability of having exactly two daughters. Let's pick out the outcomes from \( S \) that contain exactly two girls and assign them to event \( A \):</p>
+							<p>$$A=\{BGG,GBG,GGB\}$$</p>
+							<p>And you can see \( \left| A \right|=3 \). Now, compute:</p>
+							<p>$$P(A)=\frac{3}{8}=0.375$$</p>
+							<p>A 37.5% chance.</p>
+							<h3>Example 3</h3>
+							<p>In the game Minecraft, apple items randomly drop from oak leaf blocks when they break. The code defining this behavior in the game looks like this:</p>
+							<pre><code class="language-java">if(!world.isRemote && (metadata & 3) == 0 && world.rand.nextInt(200) == 0) {
+ this.dropBlockAsItem_do(world, x, y, z, new ItemStack(Item.appleRed, 1, 0));
+}</code></pre>
+							<p>The first part of the if statement checks if we are in a singleplayer world (if not, the server runs this same code instead), then it checks the <code class="inline language-java">metadata</code> value to make sure it is an oak leaf block and not another tree type (like spruce or birch). The part we care about is the <code class="inline language-java">world.rand.nextInt(200) == 0</code>. Essentially it generates a random number that is greater than or equal to zero, but less than 200 (0-199). If and only if the number that was generated is 0, it then passes the if statement and drops an apple.</p>
+							<p>The important part is that we can assume <code class="inline language-java">world.rand.nextInt(200)</code> generates an integer that is equally likely to be any whole number from 0 to 199. Meaning, a uniform distribution. So, if \( A \) is the event an apple drops and \( S \) is the sample space of our random numbers:</p>
+							<p>$$S=\{0,1,\cdots,199\}\quad\left| S \right|=200$$</p>
+							<p>$$A=\{0\}\quad\left| A \right|=1$$</p>
+							<p>$$P(A)=\frac{1}{200}=0.005$$</p>
+							<p>Meaning there is a 0.05% chance an apple drops from any broken oak leaf block. A rather simple, but amusing example.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+		<script>
+			hljs.highlightAll();
+			document.querySelectorAll('code.inline').forEach(el => {
+				hljs.highlightElement(el);
+			});
+		</script>
+	</body>
+</html>
