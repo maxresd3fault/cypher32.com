@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 1.4 - Combinatorics</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the four possible ways to count objects using combinatorics.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 1.4 - Combinatorics</h2>
+							<em class="date">4/19/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>1.4 introduces the four possible ways to count objects using combinatorics.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Combinatorics Intro</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Combinatorics is the mathematics of counting. At its core, it seeks to solve problems regarding the selection and arrangement of objects. For example, it can help us figure out how many ways can we choose \( k \) objects out of \( n \) objects.</p>
+							<p>To approach these kinds of counting problems, there are two things to keep in mind:</p>
+							<ul>
+								<li>Replacement - whether an object can be selected more than once.</li>
+								<li>Order - whether the sequence in which objects are chosen is important.</li>
+							</ul>
+							<p>For the rest of the article we will go through the four possible combinations of these two rules and look at how to use them. But first, we will see how combinatorics applies to what we have already started to do in <a href="1.3_finite_sample_spaces_and_uniform_distributions.html">1.3</a>:</p>
+							<h3>The Multiplication Principle</h3>
+							<p>This is one of the most fundamental rules in combinatorics which we have actually already used. This rule states that if we are running an experiment where:</p>
+							<ul>
+								<li>The first step has \( n_{1} \)​ possible outcomes</li>
+								<li>The second step has \( n_{2} \)​ possible outcomes...</li>
+								<li>And this continues up to the \( k^{th} \) step, which has \( n_{k} \)​ possible outcomes</li>
+							</ul>
+							<p>Then the total number of ways the entire sequence can occur (the cardinality) is the product of the number of outcomes at each individual step (\( n_{1}​\times n_{2}\times\cdots​\times n_{k} \)​). We then change our process based on if we are working with or without replacement and order.</p>
+						</div>
+					</div>
+					<h1>With Replacement & With Order</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Example 1</h3>
+							<p>Let's look at the creation of a three letter word using the English alphabet. The first, second, and third letter all have 26 choices (letters to choose from). Replacement is allowed because we can have a word like <em>AAA</em>, the order is also important because it defines the makeup of the word. Applying the multiplication principle, we can compute the number of possible combinations.</p>
+							<p>$$26\times26\times26=26^{3}=17,576$$</p>
+							<p>We can then deduce that when working with replacement and order, we can simply calculate \( n^{k} \) to find the total number of ways to choose \( k \) objects out of \( n \).</p>
+							<h3>Example 2</h3>
+							<p>What if we want to find the probability that at least one out of 20 <a href="/">www.cypher32.com</a> readers (I doubt there are that many) has their birthday today.</p>
+							<ul>
+								<li>\( n = 365 \) (number of days in a year)</li>
+								<li>\( k = 20 \) (number of people)</li>
+							</ul>
+							<p>Because each person's birthday is independent, we treat this as choosing with replacement. And order matters because the people are unique individuals (except my friend Dylan). Even though the final answer for the probability is the same regardless of how we frame the "order", using the ordered approach (\( n^{k} \)) is the most direct way to apply the multiplication principle here.</p>
+							<p>Anyway, we actually want to first calculate the probability that a person does <em>NOT</em> have their birthday today (it is almost always easier to calculate the probability of the event not happening then subtracting that from 1):</p>
+							<p>$$P=\frac{364}{365}$$</p>
+							<p>Then apply to all 20 people:</p>
+							<p>$$P=1-\left( \frac{364}{365} \right)^{20}\approx 0.05339$$</p>
+							<p>Giving us an approximately 5.3% chance that at least one of 20 readers has a birthday today. A roughly 10.6x higher probably than getting an apple in Minecraft. Wonderful.</p>
+							<p>Just to clarify, if we instead calculated:</p>
+							<p>$$P=\left( \frac{1}{365} \right)^{20}$$</p>
+							<p>Then we would actually be finding the probability that <em>all</em> 20 people share their birthday today, an extremely minuscule probability. That is why we calculated the probability of nobody at all having a birthday then subtracted that from one, as this logically results in the probability of any one person having a birthday.</p>
+						</div>
+					</div>
+					<h1>Without Replacement & With Order</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Working without replacement and with order describes a scenario where the selection process follows a sequence (the order matters), but each object can only be selected once. Each time we choose objects without replacement, the number of available options for the next step decreases:</p>
+							<ul>
+								<li>First selection - we have \( n \) options</li>
+								<li>Second selection - we have \( n-1 \) options...</li>
+								<li>\( k^{th} \) selection - we have \( n−(k−1) \Leftrightarrow n−k+1^{*} \) options</li>
+							</ul>
+							<p>*The amount subtracted is always one less than the step number (note that on the second selection we subtracted 1 and not 2). Therefore, at step \( k \), we subtract \( (k−1) \) from the original \( n \).</p>
+							<h3>Factorials (\( k! \))</h3>
+							<p>A factorial, denoted as \( k! \), represents the total number of unique ways to arrange a set of \( k \) objects in a sequence.</p>
+							<p>$$k!=k(k−1)(k−2)\cdots2\times1$$</p>
+							<p><strong>For clarity:</strong> factorials arrange all available objects. You'd use this when asking yourself: in how many different orders can I arrange all \( k \) objects in a group?</p>
+							<h3>Permutations (\( nPk \))</h3>
+							<p>A permutation applies the multiplication principle and is then our final result when we need to calculate the number of ways to choose \( k \) objects out of a total of \( n \) objects, where the order of selection matters and we are not using replacement.</p>
+							<p>$$P(n,k)=n(n−1)(n−2)\cdots(n−k+1)$$</p>
+							<p>Remember, we got \( (n−k+1) \) from our initial reasoning above. Permutations can also be expressed using factorials as:</p>
+							<p>$$P(n,k)=\frac{n!}{(n-k)!}$$</p>
+							<ul>
+								<li>\( n! \) represents the total arrangements possible if we used every object</li>
+								<li>\( (n-k)! \) is used to divide out the objects we did not pick, essentially stopping the sequence once we have chosen our \( k \) objects</li>
+							</ul>
+							<p><strong>For clarity:</strong> permutations select and arrange a subset. You'd use this when asking yourself: if I have a larger pool of \( n \) objects, how many ways can I pick \( k \) of them and arrange them in a specific order?</p>
+							<h3>Example</h3>
+							<p>To understand how all this is applied, let's imagine two of the 20 <a href="/">www.cypher32.com</a> readers will become the president and vice-president of The Republic of China (hopefully not Dylan):</p>
+							<ul>
+								<li>First there are 20 options for the presidency</li>
+								<li>Once the presidency is filled, there are 19 remaining people to choose from for the vice-president</li>
+							</ul>
+							<p>We can now solve for the total number of choices using the permutation formula where \( n=20 \) and \( k=2 \):</p>
+							<p>$$P(20,2)=\frac{20!}{(20-2)!}=\frac{20!}{18!}=20\times19^{*}=380$$</p>
+							<p>Giving us 380 unique ways to choose the president and vice-president.</p>
+							<p>*Remember, a factorial is defined as the product of all positive integers from \( k \) down to 1, therefore:</p>
+							<ul>
+								<li>\( 20!=20\times19\times18\times17\times\cdots\times1 \)</li>
+								<li>\( 18!=18\times17\times\cdots\times1 \)</li>
+							</ul>
+							<p>When we write the fraction \( \frac{20!}{18!} \)​, we want to expand the numerator until it matches the denominator:</p>
+							<p>$$\frac{20\times19\times18!​}{18!}$$</p>
+							<p>Because \( 18! \) appears in both the numerator and the denominator, they cancel each other out, leaving only \( 20\times19 \).</p>
+						</div>
+					</div>
+					<h1>Without Replacement & Without Order</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>When choosing without replacement and without order, we start by calculating the number of ways to pick objects as if the order mattered (using permutations like above), then we divide out the duplicate arrangements that occur because the order does not actually effect the outcome. This is known as a binomial coefficient, and is defined as:</p>
+							<p>$$C(n,k)=\begin{pmatrix}
+								n \\
+								k
+								\end{pmatrix} = \frac{n!}{(n-k)!k!}$$</p>
+							<p>This same concept is also found in regular algebra in the form of the binomial theorem:</p>
+							<p>$$(a+b)^{n}=\sum_{k=0}^{n}\begin{pmatrix}
+								n \\
+								k
+								\end{pmatrix}a^{n-k}b^{k}$$</p>
+							<p>Just as we pick \( k \) objects for a set without regard to order in statistics, we pick \( k \) positions for the variable \( b \) with this formula in algebra.</p>
+							<p>We can also infer:</p>
+							<p>$$\begin{pmatrix}
+								n \\
+								k
+								\end{pmatrix} = \begin{pmatrix}
+								n \\
+								n-k
+								\end{pmatrix}$$</p>
+							<p>This makes sense because choosing \( k \) objects to include is mathematically identical to choosing \( n−k \) objects to exclude.</p>
+							<p>Finally, its also very useful to note:</p>
+							<p>$$\begin{pmatrix}
+								n \\
+								1
+								\end{pmatrix}=\begin{pmatrix}
+								n \\
+								0
+								\end{pmatrix}=\begin{pmatrix}
+								n \\
+								n
+								\end{pmatrix} = n$$</p>
+							<h3>Example 1</h3>
+							<p>Let's find out how many standard five player Counter-Strike teams can be formed from the 20 readers. First we calculate the permutation:</p>
+							<p>$$P(20,5)=\frac{20!}{(20-5)!}=\frac{20!}{15!}$$</p>
+							<p>But! We have to account for the fact that the five players on the team can be rearranged in \( 5! \) ways without creating a "new" team, because the order of the players within the team does not change the outcome. So we want to divide by \( 5! \) to eliminate the duplicates.</p>
+							<p>$$\begin{pmatrix}
+								20 \\
+								5
+								\end{pmatrix}=\frac{20!}{15!5!}=\frac{20\times19\times18\times17\times16​}{5\times4\times3\times2\times1}=\frac{1,860,480​}{120}=15,504$$</p>
+							<p>Resulting in 15,504 possible Counter-Strike teams from 20 people. You can also see that this perfectly falls in line with our binomial coefficient definition from above.</p>
+							<h3>Example 2</h3>
+							<p>If we take four cards from a standard 52 card deck (there are four 13 card suits in a deck), what is the probability all four cards are of the same suit? This example will use what we learned about finite sample spaces and uniform distributions in <a href="1.3_finite_sample_spaces_and_uniform_distributions.html">1.3</a>. First we define our sample space's cardinality:</p>
+							<p>$$\left| S \right|=\begin{pmatrix}
+								52 \\
+								4
+								\end{pmatrix}$$</p>
+							<p>Or in other words all the possible ways we can take four cards from the deck without order and without replacement. Next we define the cardinality of event \( A \), being the event where we get the four cards of the same suit</p>
+							<p>$$\left| A \right|=4^{*}\times\begin{pmatrix}
+								13 \\
+								4
+								\end{pmatrix}$$</p>
+							<p>This is a uniform distribution because we can assume there is an equal chance to draw any given card from the deck. So our probability would look like this:</p>
+							<p>$$P(A)=\frac{4\times\begin{pmatrix}
+								13 \\
+								4
+								\end{pmatrix}}{\begin{pmatrix}
+								52 \\
+								4
+								\end{pmatrix}}=\frac{4\times\left( \frac{13!}{9!4!} \right)}{\frac{52!}{48!4!}}=\frac{4\times715}{270,725}=\frac{2,860}{270,725}\approx0.01056$$</p>
+							<p>Just about a 1% chance. As you can see these computations can start to get quite tedious.</p>
+							<p>*We multiply by four suits here, not four cards!</p>
+							<h3>Example 3</h3>
+							<p>What if we draw five cards, then what is the probability that at least one suit is missing? We will call the event of one suit missing event \( A \).</p>
+							<p>To do this we will again find the opposite first, the probability that you do draw all four suits, then subtract that from one. The only way this is possible is if you have three cards from three unique suits, then two cards from the fourth suit. To find the cardinality of event \( B \) we need to find and multiply:</p>
+							<ul>
+								<li>The probability we choose the suit which we will have two cards from: \( \begin{pmatrix}
+									4 \\
+									1
+									\end{pmatrix} \)</li>
+								<li>The probability we get two cards from that suit: \( \begin{pmatrix}
+									13 \\
+									2
+									\end{pmatrix} \)</li>
+								<li>The probabilities we get one card from each of the other suits: \( \begin{pmatrix}
+									13 \\
+									1
+									\end{pmatrix}\times\begin{pmatrix}
+									13 \\
+									1
+									\end{pmatrix}\times\begin{pmatrix}
+									13 \\
+									1
+									\end{pmatrix} \)</li>
+							</ul>
+							<p>Then divide that by the cardinality of the sample space, which is the total number of ways to draw five cards:</p>
+							<p>$$P(A)=1-\frac{\begin{pmatrix}
+								4 \\
+								1
+								\end{pmatrix}\times\begin{pmatrix}
+								13 \\
+								2
+								\end{pmatrix}\times\begin{pmatrix}
+								13 \\
+								1
+								\end{pmatrix}\times\begin{pmatrix}
+								13 \\
+								1
+								\end{pmatrix}\times\begin{pmatrix}
+								13 \\
+								1
+								\end{pmatrix}}{\begin{pmatrix}
+								52 \\
+								5
+								\end{pmatrix}}$$</p>
+							<p>This starts to simplify to:</p>
+							<p>$$P(A)=1-\frac{4\times\begin{pmatrix}
+								13 \\
+								2
+								\end{pmatrix}\times13^{3}}{\begin{pmatrix}
+								52 \\
+								5
+								\end{pmatrix}}$$</p>
+							<p>I will spare both of us the full steps of solving this out:</p>
+							<p>$$P(A)=1-\frac{4\times78\times2,197}{2,598,960}=1-\frac{685,464}{2,598,960}\approx0.7362$$</p>
+							<p>Giving us a roughly 73.6% chance you would have at least one of the four suits missing when drawing five cards.</p>
+						</div>
+					</div>
+					<h1>With Replacement & Without Order</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Unlike the other three cases we've learned, for this one we aren't just picking a subset of objects. We are distributing \( k \) identical objects into \( n \) distinct categories. Because we can pick the same object multiple times (replacement) and the order doesn't matter, we are essentially just counting how many of each category we end up with. The formula for this is:</p>
+							<p>$$\frac{(n+k-1)!}{(n-1)!k!}$$</p>
+							<p>But the easiest way to actually do this is to reuse the binomial coefficient from before:</p>
+							<p>$$\begin{pmatrix}
+								n+k-1 \\
+								k
+								\end{pmatrix}$$</p>
+							<h3>Example</h3>
+							<p><img class="image-right" src="/images/posts/statistics/tdk_sa90.webp" alt="tdk_sa90.webp" width="200" height="125"/>TDK is doing a promotion where they will randomly distribute 500 <em>TDK SA 90 High Bias</em> audio cassettes among 2,000 lucky previous customers. Let's figure out how many possible ways those unique 2,000 people could receive a random amount of 500 identical objects. We know that:</p>
+							<ul>
+								<li>\( k = 500 \)</li>
+								<li>\( n = 2,000 \)</li>
+							</ul>
+							<p>Plugging that into the binomial coefficient looks like:</p>
+							<p>$$\begin{pmatrix}
+								2,000+500-1 \\
+								500
+								\end{pmatrix}=\begin{pmatrix}
+								2,499 \\
+								500
+								\end{pmatrix}$$</p>
+							<p>Solving that yields:</p>
+							<p>\begin{aligned}
+								\begin{pmatrix}
+								2,499 \\
+								500
+								\end{pmatrix} = & \, 32,204,921,118,319,116,480,049,251,317,796,130, \\
+								& 281,825,948,099,449,889,317,188,787,242,950,141, \\
+								& 284,779,228,849,627,250,755,588,682,058,032,881, \\
+								& 512,761,205,457,210,330,089,586,612,013,044,991, \\
+								& 392,847,151,242,120,616,126,574,037,690,823,439, \\
+								& 276,770,579,978,492,748,788,391,697,131,227,045, \\
+								& 653,013,734,383,998,165,197,810,064,568,191,505, \\
+								& 897,958,195,806,725,860,835,588,128,451,705,524, \\
+								& 444,389,039,486,406,398,763,592,374,731,259,071, \\
+								& 091,974,208,612,921,521,254,941,777,923,015,599, \\
+								& 729,090,119,684,951,402,434,825,805,263,009,100, \\
+								& 630,432,890,507,265,346,332,937,794,630,467,309, \\
+								& 668,443,433,783,282,788,628,601,524,764,307,512, \\
+								& 873,070,307,551,889,681,258,490,073,065,285,475, \\
+								& 460,436,854,755,222,384,285,306,932,805,779,621, \\
+								& 376
+								\end{aligned}</p>
+							<p>This number is about \( 3.22049\times10^{459} \) times larger than the total number of atoms in the observable universe (roughly \( 10^{82} \) atoms).</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
