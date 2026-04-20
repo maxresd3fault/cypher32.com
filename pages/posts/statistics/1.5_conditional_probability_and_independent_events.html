@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 1.5 - Conditional Probability & Independent Events</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the concept of conditional probability and independent events.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 1.5 - Conditional Probability & Independent Events</h2>
+							<em class="date">4/20/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>1.5 introduces the concept of conditional probability and independent events.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Conditional Probability</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Finding the conditional probability of an event means finding the probability of it occurring if another event has already occurred:</p>
+							<p>$$P(A|B)=\frac{P(A\cap B)}{P(B)}$$</p>
+							<p>Solving this would then yield the probability of \( A \) happening <em>if</em> \( B \) also already happened. To refresh and understand how this works, we can recall that the definition of probability boils down to:</p>
+							<p>$$\text{Probability}=\frac{\text{Number of favorable outcomes}}{​\text{Total number of possible outcomes in the sample space }S}$$</p>
+							<p>However, if we know \( B \) has already happened, then any outcome that is <em>not</em> in \( B \) is now impossible. Therefore, \( B \) essentially becomes our new sample space. So, in the case above we now only care about the part of \( A \) that overlaps with \( B \), which is their union of course (\( A\cap B \)).</p>
+							<p>Some things to note:</p>
+							<ul>
+								<li>\( P(A|B) \) can be more than, less than, or equal to \( P(A) \)</li>
+								<li>If \( A\cap B=\phi \) then \( P(A|B)=0 \)</li>
+								<li>If \( A\cap B=B \) then \( P(A|B)=1 \)</li>
+								<li>If \( A\cap B=A \) then \( P(A|B)=\frac{P(A)}{P(B)} \)</li>
+							</ul>
+							<h3>Conditional Probability as a Probability Measure</h3>
+							<p>Once we have restricted the new sample space to an event that has already happened, like \( B \), the other probabilities we then calculate within that space still obey all the Axioms of Probability (from <a href="1.2_axioms_and_properties_of_probability.html">1.2</a>). For any event \( A \) (that is a subset of the sample space \( S \)) given a fixed event \( B \), the function \( P(A∣B) \) still obeys:</p>
+							<ul>
+								<li>Axiom of Non-Negativity - the probability of \( A \) given \( B \) is always between 0 and 1:<br>\( 0\le P(A|B)\le 1 \)</li>
+								<li>Axiom of Certainty - the probability of the entire sample space \( S \) given \( B \) is 1:<br>\( P(S|B)=1 \)</li>
+								<li>Axiom of Additivity - for a sequence of mutually exclusive (disjoint) events \( A_{k} \)​, the probability of their union given \( B \) is equal to the sum of their individual conditional probabilities:</li>
+							</ul>
+							<p>$$P\left( \bigcup_{k=1}^{\infty}A_{k}|B \right)=\sum_{k=1}^{\infty}P(A_{k}|B)$$</p>
+						</div>
+					</div>
+					<h1>Independent Events</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Two events \( A \) and \( B \) are independent if \( P(A\cap B)=P(A)P(B) \), otherwise they must be dependent. If \( P(A|B) \) is defined <em>and</em> the two events \( A \) and \( B \) are independent, then \( P(A|B)=P(A) \). When two events are independent, it means that the outcome of \( B \) does not change the probability that \( A \) will happen. Take another look at the formula for conditional probability we just learned:</p>
+							<p>$$P(A|B)=\frac{P(A\cap B)}{P(B)}$$</p>
+							<p>Well, if \( A \) and \( B \) are independent it becomes:</p>
+							<p>$$P(A|B)=\frac{P(A)P(B)}{P(B)}$$</p>
+							<p>Which naturally simplifies to:</p>
+							<p>$$P(A|B)=P(A)$$</p>
+							<p>A similar definition of independence also applies to more than two events:</p>
+							<p>$$P(A\cap B\cap C)=P(A)P(B)P(C)$$</p>
+							<p>If we have a collection of events \( B_{1}​,B_{2}​,\cdots \) that form a partition\(^{*}\) of the sample space \( S \), we can calculate the total probability of event \( A \) by summing the conditional probabilities of \( A \) given each partition:</p>
+							<p>$$P(A)=\sum_{k=1}^{\infty}P(A|B_{k})P(B_{k})$$</p>
+							<p>If we are working with a single event \( B \) and its complement \( B^{c} \), this then simplifies to:</p>
+							<p>$$P(A)=P(A∣B)P(B)+P(A∣B^{c})P(B^{c})$$</p>
+							<p>Another useful thing to learn is Bayes' Formula. This allows us to undo a conditional probability. If we know \( P(A∣B_{i}​) \), we can then calculate \( P(B_{i}​∣A) \), which is the probability that a specific condition \( B_{i} \)​ was the cause of event \( A \):</p>
+							<p>$$P(B_{i}|A)=\frac{P(A|B_{i})P(B_{i})}{\sum_{k=1}^{\infty}P(A|B_{k})P(B_{k})}$$</p>
+							<p>For a single event \( B \) and its complement \( B^{c} \), this results in:</p>
+							<p>$$P(B|A)=\frac{P(A|B)P(B)}{P(A|B)P(B)+P(A|B^{c})P(B^{c})}$$</p>
+							<p>Both of these theorems are useful because they allow us to infer the probability of a cause (\( B_{i}​ \)) based on an observed result (\( A \)). For example, in medicine, \( A \) might be a positive test result where \( B_{i} \)​ might be the presence of a disease. Bayes' formula can help find the probability the patient actually has the disease given that the test came back positive.</p>
+							<p>*A partition means that all \( B_{k} \)​ events together make up the entire sample space \( S \) (the union of them is equal to \( S \)), and no two events overlap (they are pairwise disjoint).</p>
+							<h3>Example 1</h3>
+							<p>Let \( A \) be the event that a person named Zander gets diagnosed with lung cancer in the year 2050, and let \( P(A)=0.6 \). Then let \( B \) be the event that a person named Mark files for bankrupcy in 2050, and let \( P(B)=0.8 \). Now, assuming these two events are obviously independent of one another, let's figure out the chance of <em>either</em> of them happening in 2050.</p>
+							<p>Recall that for independent events, the probability of both occurring (the intersection) is the product of their individual probabilities:</p>
+							<p>$$P(A\cap B)=P(A)\times P(B)$$</p>
+							<p>So in this case:</p>
+							<p>$$P(A\cap B)=0.6\times0.8=0.48$$</p>
+							<p>Therefore the probability <em>both</em> tragedies happen in 2050 is 48%. Yikes. Now to find the union of both (either or happening) we use what we learned in <a href="1.2_axioms_and_properties_of_probability.html">1.2</a>:</p>
+							<p>$$P(A\cup B)=P(A)+P(B)-P(A\cap B)$$</p>
+							<p>$$P(A\cup B)=0.6+0.8-0.48$$</p>
+							<p>$$P(A\cup B)=0.92$$</p>
+							<p>A 92% chance at least one of these guys gets seriously screwed.</p>
+							<h3>Example 2</h3>
+							<p>Imagine we select a group of 10 Supply Chain Management students and 10 Aerospace Engineering students. Among both groups of students 20% passed their Linear Algebra class and 80% failed. Let \( A \) be the event a student is studying Supply Chain Management and let \( B \) be the event a student (miraculously) passed Linear Algebra.</p>
+							<p>The first question we can ask about this scenario is: are these two events independent of each other? Well, we just defined the mathematical definition of dependance so instead of guessing let's prove it. First find the probabilities of the events:</p>
+							<p>$$P(A)=\frac{10}{20}=0.5$$</p>
+							<p>$$P(B)=\frac{4}{20}=0.2$$</p>
+							<p>We have four on the numerator for event \( B \) because two people passed the class from both degree programs, then divide that total number than passed by the cardinality of the sample space (20 students total). Next we can find if the student is studying Supply Chain Management <em>and</em> passed Linear Algebra:</p>
+							<p>$$P(A\cap B)=\frac{2}{20}=0.1$$</p>
+							<p>Now we can multiply the probabilities and check for independence:</p>
+							<p>$$P(A)\times P(B)=0.5\times0.2=0.1$$</p>
+							<p>Because \( P(A\cap B)=P(A)P(B) \), the events are indeed independent.</p>
+							<p>Now, due to these frankly appalling passing rates, one Supply Chain Management student effective immediately drops out of the program. The total population of students between the two programs has now decreased to 19. Given this development, are the two events still independent? The new facts are:</p>
+							<ul>
+								<li>The Supply Chain Management cohort now has 9 students total with 1 who passed</li>
+								<li>The Aerospace Engineering cohort still has 10 students total with 2 who passed (unchanged)</li>
+							</ul>
+							<p>We compute the new probabilities for the same events:</p>
+							<p>$$P(A)=\frac{9}{19}\approx0.4736$$</p>
+							<p>$$P(B)=\frac{3}{19}\approx0.1578$$</p>
+							<p>$$P(A\cap B)=\frac{1}{19}\approx0.0526$$</p>
+							<p>$$P(A)\times P(B)\approx0.0747$$</p>
+							<p>\( 0.0526\neq 0.0747 \) so the events are now dependent. Before someone dropped out, the probability of passing (\( B \)) was the same whether you looked at the whole school or just the Supply Chain cohort (\( A \)). But after someone dropped out, the percentage of passing students within the Supply Chain cohort changes, while the percentage of passing students in Aerospace stays the same. Therefore the events are no longer balanced and independent. And most people will be retaking an exam soon.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
