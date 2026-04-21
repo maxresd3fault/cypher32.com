@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 2.1 - Discrete Random Variables</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces random variables, ranges, discrete random variables and their application in a uniform distribution.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 2.1 - Discrete Random Variables</h2>
+							<em class="date">4/21/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>2.1 introduces random variables, ranges, discrete random variables and their application in a uniform distribution.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Random Variables</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Using random variables in statistics is how we can analyze the outcome of a random experiment with mathematics. A random variable (\( X \)) is defined as a function that maps every possible outcome of a sample space (\( S \)) to a specific real number:</p>
+							<p>$$X:S\in \mathbb{R}$$</p>
+							<p>For example, we roll a die twice and sum the results, the sample space is the set of all possible sums:</p>
+							<p>$$S=\{2,3,\cdots,12\}$$</p>
+							<p>The function \( X \) (where \( m \) is an outcome within the sample space) assigns a value from this set to each outcome of the experiment; turning the qualitative outcomes into quantitative data:</p>
+							<p>$$X(m)=m\forall m\in S$$</p>
+							<p>To clarify, this function doesn't change the number, rather, it just labels the outcome as a numerical value for us to then use in calculations.</p>
+							<p>This may seem redundant and unnecessary at first, but we will see soon why this is important.</p>
+						</div>
+					</div>
+					<h1>Distributions</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The distribution of a random variable is the assignment of probabilities to each value that the random variable can take. For example, we toss a coin twice and count the number of heads we get. Let \( X \) be the number of heads (hence the definition a random variable above):</p>
+							<p>$$P(X=0)=\frac{1}{4},\quad P(X=1)=\frac{1}{2},\quad P(X=2)=\frac{1}{4}$$</p>
+							<p>If \( X=0 \) it means we got no heads in either coin flip, and the probability of that is 0.25, the same logic then applies to the other values.</p>
+						</div>
+					</div>
+					<h1>Range</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The range of a random variable is the set of all possible values that the random variable \( X \) can be as a result of an experiment. Ranges are categorized based on how many values they contain. This goes back to our introduction of sets/sample spaces in <a href="1.1_probability_theory_and_sample_spaces.html">1.1</a>. But let's review:</p>
+							<h3>Countable Range</h3>
+							<p>As the name implies, these are ranges where the objects can be listed or counted. It can be either:</p>
+							<ul>
+								<li>Finite - the range contains a specific number of elements. For example, if \( X \) is the outcome of a single die roll, the range is \( \{1,2,3,4,5,6\} \)</li>
+								<li>Infinitely countable - the range goes on forever, but we can still assign each value a position in a sequence. An example is the number of coin tosses it takes until we get heads, which could be \( \{1,2,3,\cdots\} \) and in theory, could go on forever if you were really that unlucky</li>
+							</ul>
+							<h3>Uncountable Range</h3>
+							<p>This can occur when the range consists of an interval that cannot be listed as individual points. For example, if \( X \) represents the lifetime of a proton in seconds, the range would be \( [0,\infty) \) because time is continuous.</p>
+						</div>
+						<h1>Discrete Random Variables</h1>
+						<div class="cnt-box">
+							<div class="cnt-info">
+								<p>A random variable becomes "discrete" when its range <em>is</em> countable. Meaning we can list every possible outcome (the list is either finite or infinitely countable). We now get to the Probability Mass Function (pmf), which assigns a specific probability to each possible value in the range. If \( X \) is a discrete random variable with the range \( \{x_{1},x_{2},\cdots\} \) then the function is defined as:</p>
+								<p>$$p(x_{k})=P(X=x_{k})$$</p>
+								<p>For any function to qualify as a valid pmf for a discrete random variable, its outputs must be greater than or equal to zero, and all possible values in the range must equal exactly one:</p>
+								<p>$$\sum_{k=1}^{\infty}p(x_{k})=1$$</p>
+								<p>When we perform an experiment multiple times, the actual observed frequencies are expected to match the distribution as defined by the pmf. Pmf's can also be represented by histograms, which is a great way to see how the probabilities are distributed across the possible outcomes.</p>
+								<h3>Example Pmf Definition</h3>
+								<p>We toss a coin three times and count the number of heads. Our range then looks like:</p>
+								<ul>
+									<li>TTT: 0 heads</li>
+									<li>TTH, THT, HTT: 1 head</li>
+									<li>THH, HTH, HHT: 2 heads</li>
+									<li>HHH: 3 heads</li>
+								</ul>
+								<p>$$\text{Range}(X)=\{0,1,2,3\}$$</p>
+								<p>The pmf would then be:</p>
+								<p>$$p(0)=\frac{1}{8},\quad p(1)=\frac{3}{8},\quad p(2)=\frac{3}{8},\quad p(3)=\frac{1}{8}$$</p>
+							</div>
+						</div>
+						<h1>Uniform Distributions</h1>
+						<div class="cnt-box">
+							<div class="cnt-info">
+								<p>A discrete random variable \( X \) has a uniform distribution if every value in its range has the exact same probability. If we have the range \( \{x_{1},x_{2},\cdots\} \), then \( X \) has a uniform distribution if the pmf for each value is defined as:</p>
+								<p>$$p(x_{k})=\frac{1}{n}\forall k\in\{1,2,\cdots,n\}$$</p>
+								<p>This applies only to finite ranges. A uniform distribution is impossible if the range is infinite because its not possible to distribute a total probability of one equally across an infinite number of outcomes.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
