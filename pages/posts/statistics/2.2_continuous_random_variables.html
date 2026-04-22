@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 2.2 - Continuous Random Variables</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the cumulative distribution function, continuous random variables, and the probability density function.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 2.2 - Continuous Random Variables</h2>
+							<em class="date">4/22/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>2.2 introduces the cumulative distribution function, continuous random variables, and the probability density function.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Cumulative Distribution Function</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The cumulative distribution function (cdf) allows us to calculate the probability of \( X \) falling within a specific range. For a random variable \( X \), the cumulative distribution function \( F \) is defined on the set of real numbers \( \mathbb{R} \) as:</p>
+							<p>$$F(x)=P(X\le x)$$</p>
+							<p>In other words, \( F(x) \) calculates the probability that the random variable \( X \) will take on a value less than or equal to a specific number \( x \). A function must satisfy the following four rules to be considered a valid cdf:</p>
+							<ul>
+								<li>Monotonically increasing - as \( x \) increases, the value of \( F(x) \) either stays the same or increases:<br>If \( x_{1}​\lt x_{2} \) then \( F(x_{1}​)\le F(x_{2}​) \)</li>
+								<li>Right continuous - the function is continuous when approached from the right:<br>\( F(x)=F(x+)=\lim_{\epsilon \to 0+}F(x+\epsilon) \)</li>
+								<li>Certainty - the output of the function is always between zero and one:<br>\( 0\le F(x)\le 1 \)</li>
+								<li>Limits - as \( x \) approaches negative infinity, the probability approaches zero. As \( x \) approaches positive infinity, the probability approaches one:<br>\( \lim_{x \to -\infty}F(x)=0 \)<br>\( \lim_{x \to +\infty}F(x)=1 \)</li>
+							</ul>
+							<p>For discrete random variables, the cdf is calculated by summing the probabilities of all points \( x_{k} \)​ in the range that are less than or equal to \( y \):</p>
+							<p>$$F(y)=\sum_{k:x_{k}\le y}^{}p(x_{k})$$</p>
+							<p>The probability of a specific outcome \( x_{k}​ \) is equal to the size of the "jump" the cdf makes at that point. This is calculated as:</p>
+							<p>$$p(x_{k})=F(x_{k})-\lim_{y \to x_{k}-}F(y)$$</p>
+							<p>Then to find the probability that \( X \) falls within any set of real numbers \( B \), we simply sum the pmf values for all \( x_{k} \)​ that are contained within that set:</p>
+							<p>$$P(X\in B)=\sum_{k:x_{k}\in B}^{}p(x_{k})$$</p>
+							<h3>Example</h3>
+							<p>Consider the experiment of tossing a coin three times and counting the number of heads (\( x \)). The range is all the possible number of heads: \( \{0,1,2,3\} \). The pmf would be:</p>
+							<p>$$p(0)=\frac{1}{8},\quad p(1)=\frac{3}{8},\quad p(2)=\frac{3}{8},\quad p(3)=\frac{1}{8}$$</p>
+							<p>Now the cdf can be calculated, we accumulate these probabilities as we move through the range:</p>
+							<p>$$F(0)=p(0)=\frac{1}{8}$$</p>
+							<p>$$F(1)=p(0)+p(1)=\frac{1}{8}+\frac{3}{8}=\frac{4}{8}=\frac{1}{2}$$</p>
+							<p>$$F(2)=p(0)+p(1)+p(2)=\frac{1}{8}+\frac{3}{8}+\frac{3}{8}=\frac{7}{8}$$</p>
+							<p>$$F(3)=p(0)+p(1)+p(2)+p(3)=\frac{1}{8}+\frac{3}{8}+\frac{3}{8}+\frac{1}{8}=1$$</p>
+							<p>So the final cdf is:</p>
+							<p>$$F(0)=\frac{1}{8},\quad F(1)=\frac{1}{2},\quad F(2)=\frac{7}{8},\quad F(3)=1$$</p>
+							<p>This shows that the cdf acts like a running total of probabilities, eventually reaching one at the end of the range. For example, engineers rarely care about the probability of a failure at exactly 1,000 hours, rather, they care about the total risk of failure before that time. That is what the cdf provides.</p>
+						</div>
+					</div>
+					<h1>Random Variables</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Continuous Random Variables</h3>
+							<p>In the case of discrete variables, we dealt with "jumps" and specific probability masses (the pmf). With continuous random variables, the probabilities are spread out. A random variable with a continuous cdf is then considered a continuous random variable.</p>
+							<h3>Random Variable Properties</h3>
+							<p>If a random variable \( X \) has the cdf \( F \), and is either discrete or continuous, then:</p>
+							<p>$$P(a\lt X\le b)=F(b)−F(a)$$</p>
+							<p>This function finds the probability that the random variable \( X \) falls between \( a \) and \( b \).</p>
+							<p>$$P(X\gt b)=1−F(b)$$</p>
+							<p>This function calculates the probability that the random variable \( X \) is greater than a specific threshold \( b \).</p>
+						</div>
+					</div>
+					<h1>Probability Density Function</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>In discrete scenarios (like coin tosses), we used the probability mass function (pmf) to assign specific probabilities to individual outcomes. However, for continuous variables, the probability of any single, exact point is always zero. Therefore, we define the probability density function (pdf) as the rate at which probability accumulates.</p>
+							<p>Let \( X \) be a continuous random variable with the cdf \( F \). The pdf function \( f \) is then defined by the derrivative of that cdf function:</p>
+							<p>$$f(x)=F'(X)$$</p>
+							<p>The following are then true:</p>
+							<ul>
+								<li>Accumulation - the cdf is simply the integral of the pdf from negative infinity up to a point \( x \):</li>
+							</ul>
+							<p>$$F(x)=\int_{-\infty}^{x}f(t)dt$$</p>
+							<ul>
+								<li>Derivative relation - the pdf \( f(x) \) is the derivative of the cdf \( F(x) \) at any point where that derivative exists</li>
+								<li>Calculating probability in a set - to find the probability that \( X \) falls within any set \( B \) (such as an interval), we integrate the pdf over that set:</li>
+							</ul>
+							<p>$$P(X\in B)=\int_{B}^{}f(t)dt$$</p>
+							<p>By using the pdf, we can calculate probabilities for continuous ranges (like time until a battery dies) that would be impossible to sum individually. Since the total area under the pdf function's curve must always equal 1, it provides data for the likelihood of all possible outcomes of a continuous variable.</p>
+							<h3>Special Cases</h3>
+							<p>Let's look at how to calculate probabilities when the set \( B \) represents different types of intervals for a continuous random variable</p>
+							<ul>
+								<li>Single point \( (B=\{a\}) \) - the probability that \( X \) equals any exact value a is zero, calculated as the integral from \( a \) to \( a \):</li>
+							</ul>
+							<p>$$P(X\in B)=P(X=a)=\int_{a}^{a}f(t)dt=0$$</p>
+							<ul>
+								<li>Open interval \( (B=(a,b)) \) - the probability that \( X \) falls strictly between \( a \) and \( b \) is the integral of the pdf from \( a \) to \( b \):</li>
+							</ul>
+							<p>$$P(X\in B)=P(a\lt X\lt b)=\int_{a}^{b}f(t)dt$$</p>
+							<ul>
+								<li>Inclusive/mixed intervals - the probability remains the same for \( (a,b], [a,b), [a,b] \) because the probability of the endpoints \( a \) or \( b \) is zero.</li>
+								<li>Union of intervals - if \( B \) is a combination of two intervals, such as \( (a,b)\cup(c,d) \), we sum the integrals for each separate interval:</li>
+							</ul>
+							<p>$$P(X\in B)=\int_{a}^{b}f(t)dt+\int_{c}^{d}f(t)dt$$</p>
+							<p>For continuous random variables, the inclusion or exclusion of endpoints (using \( \lt \) vs \( \le \)) does not change the resulting probability opposed to discrete variables, where the inclusion of a point changes the calculation because discrete points carry specific mass.</p>
+							<p>For a function \( f \) to serve as a valid pdf for a continuous random variable \( X \), its values must be greater than or equal to zero for all real numbers, and the total area under the curve across the entire range of the random variable must equal one:</p>
+							<p>$$f(x)\ge 0,\forall x\in \mathbb{R}$$</p>
+							<p>$$\int_{-\infty}^{\infty}f(t)dt=1$$</p>
+							<h3>Example</h3>
+							<p>Let \( X \) represent the time (in hours) when a battery dies. The range of all possible failure times would be \( [0,\infty) \). The pdf is defined as:</p>
+							<p>$$f(x)=\begin{cases} 
+								5e^{-5x}, & x\ge0 \\
+								0, & x\lt0
+								\end{cases}$$</p>
+							<p>Let's now find the probability that the battery will die at any point after 6 minutes but before 12 minutes. In math terms we want to find:</p>
+							<p>$$P\left( \frac{1}{10}\lt X\lt \frac{1}{5} \right)$$</p>
+							<p>We can setup the integral as we learned above:</p>
+							<p>$$\int_{\frac{1}{10}}^{\frac{1}{5}}5e^{-5t}dt$$</p>
+							<p>Now we want to find the antiderivative. The integral of \( e^{kt} \) is \( \frac{1}{k}e^{kt} \), so we can solve:</p>
+							<p>$$5\left( \frac{1}{-5} \right)e^{-5t}=-1e^{-5t}=-e^{-5t}$$</p>
+							<p>Next we evaluate at our defined boundaries:</p>
+							<p>$$-e^{-5\left( \frac{1}{5} \right)}=-e^{-1}=-\frac{1}{e}$$</p>
+							<p>$$-e^{-5\left( \frac{1}{10} \right)}=-e^{-\frac{1}{2}}=-\frac{1}{\sqrt{e}}$$</p>
+							<p>Subtract the lower limit from the upper limit:</p>
+							<p>$$\left( -\frac{1}{e} \right)-\left( -\frac{1}{\sqrt{e}} \right)=\frac{1}{\sqrt{e}}-\frac{1}{e}\approx0.2386$$</p>
+							<p>A roughly 23.86% chance the battery will die after 6 minutes but before 12 minutes.</p>
+						</div>
+						<h1>Uniform Distributions</h1>
+						<div class="cnt-box">
+							<div class="cnt-info">
+								<p>A random variable \( X \) follows a uniform distribution if its pdf is between two points, \( a \) and \( b \):</p>
+								<p>$$f(x)=\begin{cases} 
+									\frac{1}{b-a}, & a\le x\le b \\
+									0, & \text{otherwise}
+									\end{cases}$$</p>
+								<p>This is denoted as \( X∼\text{unif}[a,b] \) and means that every sub-interval of the same length within \( [a,b] \) has the exact same probability.</p>
+								<p>The cdf for a uniform distribution, is found by integrating the pdf. It accumulates from zero to one as \( x \) moves through the interval:</p>
+								<p>$$F(x)=\begin{cases} 
+									0, & x\lt a \\
+									\frac{x-a}{b-a}, & a\le x\le b \\
+									1, & b \lt x
+									\end{cases}$$</p>
+								<h3>Standard Uniform Distribution</h3>
+								<p>When \( a=0 \) and \( b=1 \), the distribution is denoted as \( X∼\text{unif}[0,1] \). This is the simplest form of the uniform distribution, and it is the baseline for generating random variables.</p>
+								<p>The pdf is one for the entire range of 0 to 1, and 0 otherwise:</p>
+								<p>$$f(x)=\begin{cases} 
+									1, & 0\le x\le 1 \\
+									0, & \text{otherwise}
+									\end{cases}$$</p>
+								<p>The cdf simply follows the value of \( x \) while within the interval:</p>
+								<p>$$F(x)=\begin{cases} 
+									0, & x\lt 0 \\
+									x, & 0\le x\le 1 \\
+									1, & 1 \lt x
+									\end{cases}$$</p>
+								<h3>Transforming Variables</h3>
+								<p>A common task in statistics is using a standard uniform variable (\( X \)) to create a new variable (\( Y \)) that follows a uniform distribution over a different interval \( [a,b] \). If \( X∼\text{unif}[0,1] \), then \( Y=a+(b−a)X \) results in \( Y∼\text{unif}[a,b] \).</p>
+								<p>We find the cdf of the new variable \( Y \) by substituting the transformation back into the original cdf:</p>
+								<p>$$F_{Y}(y)=P(Y\le y)=P(a+(b-a)X\le y)=P\left( X\le \frac{y-a}{b-a} \right)=F_{X}\left( \frac{y-a}{b-a} \right)$$</p>
+								<p>To find the pdf we differentiate the cdf of \( Y \) using the chain rule:</p>
+								<p>$$f_{Y}(y)=F'_{Y}(y)=\frac{d}{dy}F_{X}\left( \frac{y-a}{b-a} \right)=\frac{1}{b-a}F'_{X}\left( \frac{y-a}{b-a} \right)$$</p>
+								<p>This is useful because it shows how we can scale and shift basic random variables to fit any specific range needed.</p>
+							</div>
+						</div>
+						<h1>Functions of Random Variables</h1>
+						<div class="cnt-box">
+							<div class="cnt-info">
+								<p>If we have the random variable \( X \) and define a new variable \( Y=g(X) \), where the function \( g \) is both monotonic (always increasing or always decreasing) and differentiable, we can find the pdf of \( Y \) using the following:</p>
+								<p>$$f_{Y}(y)=\left| \frac{d}{dy}g^{-1}(y) \right|f_{X}(g^{-1}(y)),\quad\forall y\in\text{Range}(Y)$$</p>
+								<h3>Example</h3>
+								<p>If \( X∼\text{unif}[0,5] \) and \( Y=\sqrt{X} \) then let's find the pdf.</p>
+								<p>$$g(x)=\sqrt{x}$$</p>
+								<p>We find the inverse:</p>
+								<p>$$g^{-1}(y)=y^{2}$$</p>
+								<p>The derivative is \( 2y \), we can now apply the theorem. First we multiply the absolute value of the derivative (\( ∣2y∣=2y \)) by the original pdf of \( X \) evaluated at \( y^{2} \) which is:</p>
+								<p>$$f_{X}(x)=\frac{1}{5}$$</p>
+								<p>Therefore, the new pdf is:</p>
+								<p>$$f_{Y}(y)=2y\frac{1}{5}=\frac{2y}{5}$$</p>
+							</div>
+						</div>
+						<h1>Summary</h1>
+						<div class="cnt-box">
+							<div class="cnt-info">
+								<p>Things are starting to get a little more complicated and we are now dealing with a few similar sounding acronyms. Let's quickly review the three functions we've learned in the past two articles:</p>
+								<ul>
+									<li>pmf (probability mass function) - used only for discrete random variables. It gives the probability that \( X \) equals a specific value, like the probability of rolling a 3 on a die.</li>
+									<li>pdf (probability density function) - used for continuous random variables. It does not give probabilities of single points (which are always 0), instead, it represents the rate at which probability accumulates. It must be integrated over a range to find a total probability.</li>
+									<li>cdf (cumulative distribution function) - used for both types of random variables. It is the running total of probability. It always tells us the probability that \( X \) is less than or equal to a value \( P(X\le x) \).</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
