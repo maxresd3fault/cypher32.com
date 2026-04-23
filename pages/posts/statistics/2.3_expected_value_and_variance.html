@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 2.3 - Expected Value & Variance</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces expected value and variance, along with how to find both for discrete and continuous random variables.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 2.3 - Expected Value & Variance</h2>
+							<em class="date">4/23/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>2.3 introduces expected value and variance, along with how to find both for discrete and continuous random variables.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Expected Values</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The expected value (sometimes called the mean) is denoted as \( E(X) \) or \( \mu \). It represents the long term average outcome if we were to repeat a random experiment many times.</p>
+							<h3>Discrete Random Variables</h3>
+							<p>If \( X \) is a discrete variable (like rolling a die, where the outcomes are distinct numbers), the expected value is the sum of every possible outcome (\( x_{k} \)​) multiplied by the probability of that outcome occurring (given by the pmf \( p \)):</p>
+							<p>$$E(X)=\sum_{k}^{}x_{k}P(X=x_{k})=\sum_{k}^{}x_{k}p(x_{k})$$</p>
+							<p><strong>Important</strong>: the expected value does not always have to be a possible outcome of the experiment. For example, the expected value could be 3/5 of a person when selecting people from a population, even though you can never have 3/5 of a person (unless you're an American). The expected value can even go up to infinity.</p>
+							<p>For discrete random values whose range consists of non-negative integers, we can also use this theorem to calculate the expected value:</p>
+							<p>$$E(X)=\sum_{k=0}^{\infty}P(X>k)$$</p>
+							<p>If the discrete random variable meets this criteria, it is far easier to calculate this by hand opposed to calculating the pmf function for each object. Proof this works:</p>
+							<p>$$E(X)=\sum_{k=0}^{\infty}kp(k)=\sum_{k=1}^{\infty}\sum_{n=1}^{k}p(k)=\sum_{n=1}^{\infty}\sum_{k=n}^{\infty}p(k)=\sum_{n=1}^{\infty}P(X\ge n)=\sum_{n=0}^{\infty}P(X\gt n)$$</p>
+							<p>For example, let \( X \) be the number of die rolls it takes to get a six. The range is \( \{1,2,\cdots\} \). Let's figure out the expected number of rolls it will take to get a six. The probability that the first six takes more than \( n \) rolls is equivalent to the probability that the first \( n \) rolls were all something other than six:</p>
+							<p>$$P(X\gt n)=\left( \frac{5}{6} \right)^{n}$$</p>
+							<p>We then put this into our expected value formula:</p>
+							<p>$$E(X)=\sum_{n=0}^{\infty}\left( \frac{5}{6} \right)^{n}$$</p>
+							<p>The sum \( S \) of an infinite geometric series is given by the formula:</p>
+							<p>$$S=\frac{a}{1-r},|r|\lt 1,\quad\text{where}\quad\sum_{n=0}^{\infty}ar^{n}$$</p>
+							<p>If we substitute in our values we get:</p>
+							<p>$$E(X)=\frac{1}{1-\frac{5}{6}}=\frac{1}{\frac{1}{6}}=6$$</p>
+							<p>Meaning the expected number of rolls to get the first six is six rolls.</p>
+							<h3>Continuous Random Variables</h3>
+							<p>As we've learned, unlike discrete variables (which take on countable values) a continuous random variable can take on any value within a range or interval. For a continuous random variable \( X \) with a pdf \( f(x) \), the expected value \( E(X) \) is defined by an integral rather than a sum:</p>
+							<p>$$E(X)=\int_{-\infty}^{\infty}xf(x)dx$$</p>
+							<p>While the discrete formula calculates an average by multiplying values by their specific probabilities, the continuous formula uses the pdf to weight the values across a smooth range.</p>
+							<p>An example if \( X∼\text{unif}[a,b],a\neq b \):</p>
+							<p>$$E(X)=\int_{-\infty}^{\infty}xf(x)dx=\int_{a}^{b}\frac{x}{b-a}dx=\frac{b^{2}-a^{2}}{2(b-a)}=\frac{b+a}{2}$$</p>
+							<p>As for the pdf, because the total probability must be one over the interval (\( b−a \)), the height of the function is constant at \( f(x)=\frac{1}{b-a} \)​.</p>
+							<p>We can also use the same trick from the discrete function where again the range is restricted to non-negative values:</p>
+							<p>$$E(X)=\int_{0}^{\infty}P(X\gt t)dt$$</p>
+							<p>For example, let \( X \) be the lifetime of a lightbulb in years with the pdf:</p>
+							<p>$$f(x)=\begin{cases} 
+								5e^{-5x}, & x\ge0 \\
+								0, & x\lt0
+								\end{cases}$$</p>
+							<p>To find the expected lifetime of the lightbulb we can compute:</p>
+							<p>$$E(X)=\int_{0}^{\infty}P(X\gt t)dt=\int_{0}^{\infty}e^{-5t}dt=\left[ -\frac{1}{5}e^{-5t} \right]^{\infty}_{0}=0-\left( -\frac{1}{5} \right)=\frac{1}{5}$$</p>
+							<p>The expected lifetime of the lightbulb is then 0.2 years.</p>
+						</div>
+					</div>
+					<h1>Expected Value of a Function</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Let's figure out how to find the expected value of a function of a random variable, rather than just the variable itself. This is often written as \( Y=g(X) \), where \( g \) is some function.</p>
+							<p>But first, it is important to note two key properties that make calculations much easier:</p>
+							<ul>
+								<li>Constant values - if \( X \) is just a constant \( c \), its expected value is simply \( c \)</li>
+								<li>Linearity - the expected value is linear, meaning it respects addition and scalar multiplication:<br>\( E(X+Y)=E(X)+E(Y) \)<br>\( E(cX)=cE(X) \)</li>
+							</ul>
+							<p>If we have a function \( Y=g(X) \), it's not necessarily needed to find the distribution of \( Y \) first. We can calculate \( E(Y) \) directly using the distribution of \( X \).</p>
+							<p>For discrete random variables we sum the function applied to each outcome, multiplied by the pmf of that outcome:</p>
+							<p>$$E(Y)=\sum_{k}^{}g(x_{k})p_{X}(x_{k})$$</p>
+							<p>For continuous random variables we integrate the function multiplied by the pdf of \( X \):</p>
+							<p>$$E(Y)=\int_{-\infty}^{\infty}g(x)f_{X}(x)$$</p>
+							<p>This approach saves a lot of time. Instead of trying to derive a new probability formula for \( Y \) we can just use the original known behavior of \( X \) to find the average outcome of the new function \( g(X) \).</p>
+						</div>
+					</div>
+					<h1>Variance</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>While the expected value gives us the center of a distribution, the variance tells us how much the data usually spreads out from that center. The variance of a random variable \( X \), denoted as \( \text{Var}(X) \), is defined as the expected value of the squared deviation from the mean \( μ \):</p>
+							<p>$$\text{Var}(x)=E((X-\mu)^{2})$$</p>
+							<p>In other words, we calculate how far each possible outcome is from the mean (\( X−μ \)), square that distance to ensure it's positive, and then find the expected value. We can also do:</p>
+							<p>$$\text{Var}(x)=E(X^{2})-\mu^{2}$$</p>
+							<p>This is often faster because it skips having to subtract \( μ \) from every single outcome before squaring. Standard notation in statistics also has:</p>
+							<ul>
+								<li>Variance - \( \sigma^{2}=\text{Var}(X) \)</li>
+								<li>Standard deviation - \( \sigma=\sqrt{\text{Var}(X)} \)</li>
+							</ul>
+							<h3>Example 1 (Discrete)</h3>
+							<p>Let \( X \) be the number on the top face of a fair die, the range is then \( \{1,2,3,4,5,6\} \), each with a probability of 1/6 (uniform distribution). Let's fine the variance, first we find the expected value:</p>
+							<p>$$E(X)=\frac{1+2+3+4+5+6}{6}=3.5$$</p>
+							<p>Then we find \( E(X^{2}) \):</p>
+							<p>$$E(X^{2})=\frac{1^{2}+2^{2}+3^{2}+4^{2}+5^{2}+6^{2}}{6}=\frac{91}{6}\approx15.1666$$</p>
+							<p>Now we may calculate the variance:</p>
+							<p>$$\text{Var}(X)=\frac{91}{6}-3.5^{2}\approx2.9166$$</p>
+							<h3>Example 2 (Continuous)</h3>
+							<p>For a continuous variable that is spread evenly between \( a \) and \( b \), the variance measures how much that interval deviates from the midpoint \( \frac{a+b}{2} \), which is equal to \( \mu \). Let's now find \( E(X^{2}) \):</p>
+							<p>$$E(X^{2})=\int_{a}^{b}x^{2}\left( \frac{1}{b-a} \right)dx=\frac{1}{b-a}\left[ \frac{x^{3}}{3} \right]^{b}_{a}=\frac{b^{3}-a^{3}}{3(b-a)}=\frac{b^{2}+ab+a^{2}}{3}$$</p>
+							<p>Plug into the variance equation:</p>
+							<p>$$\text{Var}(X)=\frac{b^{2}+ab+a^{2}}{3}-\left( \frac{a+b}{2} \right)^{2}=\frac{b^{2}-2ab+a^{2}}{12}=\frac{(b-a)^{2}}{12}$$</p>
+						</div>
+					</div>
+					<h1>Properties of Variance</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<h3>Chebychev's Inequality</h3>
+							<p>This theorem gives us a way to estimate the probability that a random variable stays within a certain distance (\( a \)) from its mean (\( \mu \)) using only the variance (\( \sigma^{2} \)):</p>
+							<p>$$P(|X-\mu|\ge a)\le \frac{\sigma^{2}}{a^{2}},a\gt 0$$</p>
+							<p>This is useful because it allows us to bound probabilities even when we don't know the exact distribution of \( X \), provided we at least know the mean and variance.</p>
+							<h3>Linear Transformations</h3>
+							<p>If we transform a random variable using the linear equation \( Y=aX+b \), the variance changes in a specific, predictable way:</p>
+							<p>$$\text{Var}(Y)=a^{2}\text{Var}(X)$$</p>
+							<p>Also notice that the constant \( b \) has no effect on the variance. This makes sense because adding a constant shifts the entire distribution without changing its spread or shape. And squaring the scaling factor \( a \) is necessary because variance is a measure of squared distance.</p>
+							<h3>Constant Random Variables</h3>
+							<p>If \( \text{Var}(Y)=0 \), it implies that \( Y \) is a constant, meaning \( Y \) is always equal to its expected value, \( E(Y) \). This shows that variance is a measure of randomness, if there is no spread (variance is 0), there is no randomness.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
