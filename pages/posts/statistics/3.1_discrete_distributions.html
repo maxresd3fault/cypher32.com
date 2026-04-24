@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 3.1 - Discrete Distributions</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces numerous different types of discrete distributions along with their pdf, expected value, and variance formulas.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 3.1 - Discrete Distributions</h2>
+							<em class="date">4/24/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>3.1 introduces numerous different types of discrete distributions along with their pdf, expected value, and variance formulas.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Intro</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>So far we have assumed a basic uniform distribution for most everything we've done. It's now time to learn about some of the other types of distributions, and in this article we'll focus on those of the discrete variety. Here are the types we will learn:</p>
+							<ul>
+								<li>Bernoulli distribution - this distribution is the foundation for many others, it models a single trial with two possible outcomes, such as a win-loss game</li>
+								<li>Binomial distribution - models the total number of successes over a fixed number of repeated, independent trials</li>
+								<li>Geometric distribution - focuses on the number of trials required to achieve the very first success</li>
+								<li>Poisson distribution - used to model the number of independent events that occur within a specific time/interval, often applied to rare events</li>
+								<li>Hypergeometric distribution - models the probability of choosing a specific number of objects when drawing a sample from a finite collection without replacement</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Bernoulli Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>This distribution is built around an event \( A \) within a sample space \( S \). To show this, we use an indicator function \( I_{A} \)​, which acts as a random variable that assigns a value of one if the event occurs and zero if it does not:</p>
+							<p>$$I_{A}(x)=\begin{cases} 
+								1, & x\in A \\
+								0, & x\notin A
+								\end{cases}$$</p>
+							<p>If the probability of event \( A \) occurring is \( p \), the pmf of the Bernoulli random variable \( I_{A} \)​ is defined as:</p>
+							<p>$$p_{I_{A}}(x)=\begin{cases} 
+								p, & x=1 \\
+								1-p, & x=0
+								\end{cases}$$</p>
+							<p>The expected value is calculated as:</p>
+							<p>$$E(I_{A})=1p+0(1-p)=p$$</p>
+							<p>And the variance is calculated as:</p>
+							<p>$$\text{Var}(I_{A})=(1-p)^{2}p+(0-p)^{2}(1-p)=p(1-p)$$</p>
+						</div>
+					</div>
+					<h1>Binomial Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>To understand the binomial distribution, we can think of it like an extension of the Bernoulli distribution. But instead of looking at a single win-loss event, we are looking at the outcome of repeating that experiment \( n \) times. The binomial distribution, denoted as \( X∼\text{bin}(n,p) \), models the total number of successes (\( X \)) in \( n \) independent trials, where each trial has a constant probability of success \( p \). Because the trials are independent, the probability of any specific sequence containing exactly \( k \) successes is calculated as:</p>
+							<p>$$p^{k}(1-p)^{n-k}$$</p>
+							<p>Going back to <a href="1.4_combinatorics.html">combinatorics</a>, since the wins can occur in different orders, we use the combination formula \( \begin{pmatrix}
+								n \\
+								k
+								\end{pmatrix} \) to account for all possible arrangements of those \( k \) successes within the \( n \) trials.</p>
+							<p>The pmf here gives the probability of achieving exactly \( k \) successes in \( n \) trials:</p>
+							<p>$$p(k)=\begin{pmatrix}
+								n \\
+								k
+								\end{pmatrix}p^{k}(1-p)^{n-k}$$</p>
+							<p>The expected value is calculated as:</p>
+							<p>$$E(X)=np$$</p>
+							<p>And the variance is calculated as:</p>
+							<p>$$\text{Var}(X)=np(1-p)$$</p>
+						</div>
+					</div>
+					<h1>Geometric Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>While the binomial distribution counts successes in a fixed number of trials, the geometric distribution, denoted as \( X∼\text{geom}(p) \), counts the number of trials required to reach the first success. Consider another win-loss game that we repeat until we get our first win. Let \( X \) be the random variable representing the number of the trial on which the first win occurs. If the probability of a win is \( p \), then the probability of failing the first \( k−1 \) trials and finally winning on the \( k \)th trial is:</p>
+							<p>$$p(1-p)^{k-1}$$</p>
+							<p>The pmf here defines the probability that the first win happens exactly at trial \( k \):</p>
+							<p>$$p(x)=p(1-p)^{k-1}$$</p>
+							<p>The expected value is calculated as:</p>
+							<p>$$E(X)=\frac{1}{p}$$</p>
+							<p>And the variance is calculated as:</p>
+							<p>$$\text{Var}(X)=\frac{1-p}{p^{2}}$$</p>
+						</div>
+					</div>
+					<h1>Poisson Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The Poisson distribution is distinct from the previous distributions because it is usually used for counting the number of independent occurrences of an event within a fixed interval of time. A random variable \( X \) follows a Poisson distribution if it represents the count of events occurring with a constant average rate, denoted by \( \lambda \). It is written as \( X∼\text{Pois}(\lambda) \). The probability of observing exactly \( k \) occurrences is given by the formula:</p>
+							<p>$$p(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$$</p>
+							<p>The pmf here defines the probability of observing exactly \( k \) occurrences:</p>
+							<p>$$p(x)=p(1-p)^{k-1}$$</p>
+							<p>For a Poisson distribution, both the expected value and the variance are equal to the rate parameter \( \lambda \):</p>
+							<p>$$E(X)=\lambda$$</p>
+							<p>$$\text{Var}(X)=\lambda$$</p>
+							<p>One of the most useful features of the Poisson distribution is its ability to approximate the binomial distribution. For a large number of trials (\( n \)) and a very small probability of success (\( p \)), \( \text{bin}(n,p) \) can be approximated by the Poisson distribution \( \text{Pois}(np) \).</p>
+						</div>
+					</div>
+					<h1>Hypergeometric Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>This distribution is used to calculate the probability of a specific number of special objects when we are sampling from a finite collection without replacement. Unlike the binomial distribution (where trials are independent and the probability of success remains constant), the hypergeometric distribution, denoted as \( X∼\text{Hyp}(N,n,r) \), applies when the probability of success changes with each draw because we are not putting the objects back. Imagine a set of \( N \) total objects, which contains \( r \) special objects. If we choose a sample of \( n \) objects, the random variable \( X \) represents the number of special objects we collected.</p>
+							<p>$$p(k)=e^{-\lambda}\frac{\lambda^{k}}{k!}$$</p>
+							<p>The pmf here defines the probability of selecting exactly \( k \) special objects:</p>
+							<p>$$p(k)=\frac{\begin{pmatrix}
+								r \\
+								k
+								\end{pmatrix}\begin{pmatrix}
+								N-r \\
+								n-k
+								\end{pmatrix}}{\begin{pmatrix}
+								N \\
+								n
+								\end{pmatrix}}$$</p>
+								<p>The expected value is calculated as:</p>
+								<p>$$E(X)=n\frac{r}{N}$$</p>
+								<p>And the variance is calculated as:</p>
+								<p>$$\text{Var}(X)=n\frac{r}{N}(1-\frac{r}{N})\frac{N-n}{N-1}$$</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
