@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 3.2 - Continuous Distributions</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces two different types of continuous distributions along with their pdf, cdf, expected value, and variance formulas.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 3.2 - Continuous Distributions</h2>
+							<em class="date">4/25/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>3.2 introduces two different types of continuous distributions along with their pdf, cdf, expected value, and variance formulas.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Intro</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>In the last article we learned about different kinds of distributions that can be used when working with discrete random variables. Now we will look at these distributions intended for continuous random variables:</p>
+							<ul>
+								<li>Exponential distribution - models the lifespan of objects that do not age, where the probability of future survival is independent of past survival</li>
+								<li>Binomial distribution - models processes influenced by a large number of uncontrollable factors and is characterized by its symmetric bell-shaped curve</li>
+							</ul>
+						</div>
+					</div>
+					<h1>Exponential Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The exponential distribution is often used to model the lifetime of objects that do not age. A defining aspect is that it is considered "memoryless", meaning the probability of an object surviving for an additional amount of time does not depend on how long it has already survived:</p>
+							<p>$$P(T\gt t_{1}+t_{2}|T\gt t_{1})=P(T\gt t_{2})$$</p>
+							<p>A random variable \( X \) is said to have an exponential distribution, denoted as \( X∼\text{exp}(\lambda) \), if its pdf for any constant \( \lambda\gt0 \) (where lambda represents the rate) has the form:</p>
+							<p>$$f(x)=\begin{cases} 
+								\lambda e^{-\lambda x}, & x\ge0 \\
+								0, & x\lt0
+								\end{cases}$$</p>
+							<p>It would have the cdf (check <a href="/pages/posts/statistics/2.2_continuous_random_variables.html">2.2</a> if you forgot what this is):</p>
+							<p>$$F(x)=1-e^{-\lambda x}$$</p>
+							<p>The expected value is calculated as:</p>
+							<p>$$E(X)=\frac{1}{\lambda}$$</p>
+							<p>And the variance is calculated as:</p>
+							<p>$$\text{Var}(X)=\frac{1}{\lambda^{2}}$$</p>
+							<h3>Example</h3>
+							<p>The half-life of the Radium-226 isotope is 1,600 years. Let's fine the expected lifespan of a <sup>226</sup>Ra atom. The half-life is the time \( t \) at which there is a 50% probability that the atom has decayed, knowing this let's set up our cdf function:</p>
+							<p>$$0.5=1-e^{-\lambda t}$$</p>
+							<p>$$-0.5=-e^{-\lambda t}$$</p>
+							<p>$$e^{-\lambda t}=0.5$$</p>
+							<p>Then take the natural logarithm of both sides to get rid of \( e \):</p>
+							<p>$$-\lambda t=\text{ln}(0.5)$$</p>
+							<p>$$\lambda=\frac{-\text{ln}(0.5)}{t}=\frac{\text{ln}(2)}{t}$$</p>
+							<p>Now we calculate the constant lambda, given that the half-life \( t=1,600 \) years:</p>
+							<p>$$\lambda=\frac{\text{ln}(2)}{1,600}\approx\frac{0.6931}{1,600}\approx0.00043322\text{ years}^{-1}$$</p>
+							<p>We're not done, remember lambda for an exponential distribution represents a rate of how many events (in this case, radioactive decays) happen per unit of time (years). We now want to compute the expected value:</p>
+							<p>$$E(X)=\frac{1}{\frac{\text{ln}(2)}{1,600}}=\frac{1,600}{\text{ln}(2)}\approx2,308.3120\text{ years}$$</p>
+							<p>Half-Life and lambdas, I wonder where I heard this one before? Maybe next time we can learn how an anti-mass spectrometer works.</p>
+						</div>
+					</div>
+					<h1>Normal Distribution</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The normal distribution (also sometimes called the Gaussian distribution (this dude has too much stuff named after him (even the Gauss Gun in Half-Life!))) is the most commonly occurring one in all of nature. It frequently appears in scenarios involving a high number of uncontrollable parameters, such as:</p>
+							<ul>
+								<li>The distribution of atomic velocities</li>
+								<li>Random errors in experimental observations</li>
+								<li>The distribution of traits within large populations</li>
+								<li>The diffusion of particles</li>
+							</ul>
+							<p>A random variable \( X \) has a normal distribution, denoted as \( X∼\mathcal{N}(\mu,\sigma^{2}) \), if its pdf takes the following form for any constants \( \mu \) (the mean) and \( \sigma \) (the varience):</p>
+							<p>$$f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{1}{2}\left( \frac{x-\mu}{\sigma} \right)^{2}}$$</p>
+							<p>Wonderful. Furthermore, the normal distribution lacks a closed form expression for its cdf, meaning there is no combination of basic operations (like addition, multiplication, exponents, or logarithms) that can compute this integral:</p>
+							<p>$$F(x)=\int_{-\infty}^{x}f(t)dt=\frac{1}{\sqrt{2\pi\sigma^{2}}}\int_{-\infty}^{x}e^{-\frac{1}{2}\left( \frac{t-\mu}{\sigma} \right)^{2}}dt$$</p>
+							<p>Because it is literally impossible to solve the integral exactly with a simple formula, we have to rely on numerical methods, computer algorithms, or pre-calculated tables to determine the values. So instead it is common to convert any normal distribution into the standard normal distribution \( \mathcal{N}(0,1) \). By doing this, we can use a standard table (called a Z-table) that lists these pre-calculated values.</p>
+							<p>At the very least, when it comes to the expected value and variance we are spared from all this bullshit:</p>
+							<p>$$E(X)=\mu$$</p>
+							<p>$$\text{Var}(X)=\sigma^{2}$$</p>
+							<h3>Standard Normal Distribution, \( X∼\mathcal{N}(0,1) \)</h3>
+							<p>The pdf of the standard normal distribution is denoted by Phi, not to be confused with the null set:</p>
+							<p>$$\phi(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^{2}}$$</p>
+							<p>Conversely, the cdf is denoted by a capital Phi:</p>
+							<p>$$\Phi(x)=\int_{-\infty}^{x}\phi(t)dt=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{x}e^{-\frac{1}{2}t^{2}}dt$$</p>
+							<p>For your reference, here are commonly used pre-calculated values from the cdf:</p>
+							<table style="text-align:center">
+								<thead>
+									<tr>
+										<td>\( x \)</td>
+										<td class="nb">0</td>
+										<td class="nb">1</td>
+										<td class="nb">2</td>
+										<td class="nb">3</td>
+										<td class="nb">4</td>
+										<td class="nb">5</td>
+										<td class="nb">6</td>
+										<td class="nb">7</td>
+										<td class="nb">8</td>
+										<td class="nb">9</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr><td class="nb">0.0</td><td>.500</td><td>.504</td><td>.508</td><td>.512</td><td>.516</td><td>.520</td><td>.524</td><td>.528</td><td>.532</td><td>.536</td></tr>
+									<tr><td class="nb">0.1</td><td>.540</td><td>.544</td><td>.548</td><td>.552</td><td>.556</td><td>.560</td><td>.564</td><td>.568</td><td>.571</td><td>.575</td></tr>
+									<tr><td class="nb">0.2</td><td>.579</td><td>.583</td><td>.587</td><td>.591</td><td>.595</td><td>.599</td><td>.603</td><td>.606</td><td>.610</td><td>.614</td></tr>
+									<tr><td class="nb">0.3</td><td>.618</td><td>.622</td><td>.626</td><td>.629</td><td>.633</td><td>.637</td><td>.641</td><td>.644</td><td>.648</td><td>.652</td></tr>
+									<tr><td class="nb">0.4</td><td>.655</td><td>.659</td><td>.663</td><td>.666</td><td>.670</td><td>.674</td><td>.677</td><td>.681</td><td>.684</td><td>.688</td></tr>
+									<tr><td class="nb">0.5</td><td>.692</td><td>.695</td><td>.698</td><td>.702</td><td>.705</td><td>.709</td><td>.712</td><td>.716</td><td>.719</td><td>.722</td></tr>
+									<tr><td class="nb">0.6</td><td>.726</td><td>.729</td><td>.732</td><td>.736</td><td>.739</td><td>.742</td><td>.745</td><td>.749</td><td>.752</td><td>.755</td></tr>
+									<tr><td class="nb">0.7</td><td>.758</td><td>.761</td><td>.764</td><td>.767</td><td>.770</td><td>.773</td><td>.776</td><td>.779</td><td>.782</td><td>.785</td></tr>
+									<tr><td class="nb">0.8</td><td>.788</td><td>.791</td><td>.794</td><td>.797</td><td>.800</td><td>.802</td><td>.805</td><td>.808</td><td>.811</td><td>.813</td></tr>
+									<tr><td class="nb">0.9</td><td>.816</td><td>.819</td><td>.821</td><td>.824</td><td>.826</td><td>.829</td><td>.832</td><td>.834</td><td>.836</td><td>.839</td></tr>
+									<tr><td class="nb">1.0</td><td>.841</td><td>.844</td><td>.846</td><td>.848</td><td>.851</td><td>.853</td><td>.855</td><td>.858</td><td>.860</td><td>.862</td></tr>
+									<tr><td class="nb">1.1</td><td>.864</td><td>.867</td><td>.869</td><td>.871</td><td>.873</td><td>.875</td><td>.877</td><td>.879</td><td>.881</td><td>.883</td></tr>
+									<tr><td class="nb">1.2</td><td>.885</td><td>.887</td><td>.889</td><td>.891</td><td>.892</td><td>.894</td><td>.896</td><td>.898</td><td>.900</td><td>.902</td></tr>
+									<tr><td class="nb">1.3</td><td>.903</td><td>.905</td><td>.907</td><td>.908</td><td>.910</td><td>.912</td><td>.913</td><td>.915</td><td>.916</td><td>.918</td></tr>
+									<tr><td class="nb">1.4</td><td>.919</td><td>.921</td><td>.922</td><td>.924</td><td>.925</td><td>.926</td><td>.929</td><td>.928</td><td>.931</td><td>.932</td></tr>
+									<tr><td class="nb">1.5</td><td>.933</td><td>.934</td><td>.936</td><td>.937</td><td>.938</td><td>.939</td><td>.941</td><td>.942</td><td>.943</td><td>.944</td></tr>
+									<tr><td class="nb">1.6</td><td>.945</td><td>.946</td><td>.947</td><td>.948</td><td>.950</td><td>.951</td><td>.952</td><td>.952</td><td>.954</td><td>.954</td></tr>
+									<tr><td class="nb">1.7</td><td>.955</td><td>.956</td><td>.957</td><td>.958</td><td>.959</td><td>.960</td><td>.961</td><td>.962</td><td>.962</td><td>.963</td></tr>
+									<tr><td class="nb">1.8</td><td>.964</td><td>.965</td><td>.966</td><td>.966</td><td>.967</td><td>.968</td><td>.969</td><td>.969</td><td>.970</td><td>.971</td></tr>
+									<tr><td class="nb">1.9</td><td>.971</td><td>.972</td><td>.973</td><td>.973</td><td>.974</td><td>.974</td><td>.975</td><td>.976</td><td>.976</td><td>.977</td></tr>
+									<tr><td class="nb">2.0</td><td>.977</td><td>.978</td><td>.978</td><td>.979</td><td>.979</td><td>.980</td><td>.980</td><td>.981</td><td>.981</td><td>.982</td></tr>
+									<tr><td class="nb">2.1</td><td>.982</td><td>.983</td><td>.983</td><td>.983</td><td>.984</td><td>.984</td><td>.985</td><td>.985</td><td>.985</td><td>.986</td></tr>
+									<tr><td class="nb">2.2</td><td>.986</td><td>.986</td><td>.987</td><td>.987</td><td>.988</td><td>.988</td><td>.988</td><td>.988</td><td>.989</td><td>.989</td></tr>
+									<tr><td class="nb">2.3</td><td>.989</td><td>.990</td><td>.990</td><td>.990</td><td>.990</td><td>.991</td><td>.991</td><td>.991</td><td>.991</td><td>.992</td></tr>
+									<tr><td class="nb">2.4</td><td>.992</td><td>.992</td><td>.992</td><td>.992</td><td>.993</td><td>.993</td><td>.993</td><td>.993</td><td>.993</td><td>.994</td></tr>
+									<tr><td class="nb">2.5</td><td>.994</td><td>.994</td><td>.994</td><td>.994</td><td>.995</td><td>.995</td><td>.995</td><td>.995</td><td>.995</td><td>.995</td></tr>
+									<tr><td class="nb">2.6</td><td>.995</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td><td>.996</td></tr>
+									<tr><td class="nb">2.7</td><td>.996</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td><td>.997</td></tr>
+									<tr><td class="nb">2.8</td><td>.997</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td></tr>
+									<tr><td class="nb">2.9</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.998</td><td>.999</td><td>.999</td></tr>
+								</tbody>
+							</table>
+							<p>And here are more values of the standard cdf commonly used in confidence intervals/tests:</p>
+							<table style="text-align:center;width:50%">
+								<thead>
+									<tr>
+										<td>\( \Phi(x) \)</td>
+										<td class="nb">0.90</td>
+										<td class="nb">0.95</td>
+										<td class="nb">0.975</td>
+										<td class="nb">0.99</td>
+										<td class="nb">0.995</td>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td class="nb">\( x \)</td>
+										<td>1.28</td>
+										<td>1.64</td>
+										<td>1.96</td>
+										<td>2.33</td>
+										<td>2.58</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>Moving on, in order to solve for probabilities involving \( X∼\mathcal{N}(\mu,\sigma^{2}) \), we transform the variable into the standard normal distribution \( Y∼\mathcal{N}(0,1) \) using:</p>
+							<p>$$Y=\frac{X-\mu}{\sigma}$$</p>
+							<p>After doing this, the values in the above tables can then be utilized. One last useful thing to keep in mind is the symmetry of the cdf here:</p>
+							<p>$$\Phi(-x)=1-\Phi(x)$$</p>
+							<p>This can further simply computations.</p>
+							<h3>Example 1</h3>
+							<p>Let \( X∼\mathcal{N}(15,9) \). Let's then calculate \( P(X\gt20) \). Using the transformation rule defined above we can convert to the standard normal distribution:</p>
+							<p>$$P(X\gt20)=P\left( \frac{X-15}{3}\gt\frac{20-15}{3} \right)\approx P(Y\gt1.67)$$</p>
+							<p>Using the normal cdf, this is \( 1−\Phi(1.67) \), if you check the table above \( \Phi(1.67)=0.952 \), giving us a final value of 0.048/4.8%.</p>
+							<h3>Example 2</h3>
+							<p>Let \( X∼\mathcal{N}(15,9) \). Let's then calculate \( P(13\le X\le17) \). Using the transformation rule defined above we can convert to the standard normal distribution:</p>
+							<p>$$P(13\le X\le17)=P\left( \frac{13-15}{3}\le X\le\frac{17-15}{3} \right)\approx P(-0.67\le Y\le0.67)$$</p>
+							<p>$$P(-0.67\le Y\le0.67)=\Phi(0.67)-\Phi(-0.67)=0.749-(1-0.749)=0.498$$</p>
+							<p>Resulting in 49.8% when using the z-table.</p>
+							<h3>Example 3</h3>
+							<p>Let \( X∼\mathcal{N}(15,9) \). Let's then find \( t \) such that \( P(X\gt t)=0.05 \). Using the transformation rule defined above we can convert to the standard normal distribution:</p>
+							<p>$$P\left( \frac{X-15}{3}\gt\frac{t-15}{3} \right)=0.05$$</p>
+							<p>$$P\left( Y\gt\frac{t-15}{3} \right)=0.05$$</p>
+							<p>Now we simply want to solve for:</p>
+							<p>$$1-\Phi\left( \frac{t-15}{3} \right)=0.05$$</p>
+							<p>Which can be rearranged to:</p>
+							<p>$$\Phi\left( \frac{t-15}{3} \right)=0.95$$</p>
+							<p>Now we want to do the exact <em>opposite</em> of what we did for the first two examples. We want to Ctrl-F for the result (.950) and find what value gives it in the z-table, which happens to be 1.64. We can then setup:</p>
+							<p>$$\frac{t-15}{3}\approx1.64$$</p>
+							<p>Then solve with normal algebra:</p>
+							<p>$$t-15=4.92$$</p>
+							<p>$$t=19.92$$</p>
+							<p>Meaning the threshold value \( t \) is about 19.92. So there is a 5% chance that a random variable from this distribution will be greater than 19.92.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
