@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 3.3 - Joint Distributions</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces discrete and continuous random vectors along with the joint cdf and pdf.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 3.3 - Joint Distributions</h2>
+							<em class="date">4/26/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>3.3 introduces discrete and continuous random vectors along with the joint cdf and pdf.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Random Vectors</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A random vector is a way to group multiple random variables together so we can analyze them as a single object. If \( X \) and \( Y \) are individual random variables, then the pair \( (X,Y) \) is defined as a 2D random vector. This is not limited to just two variables, we can of course extend this to higher dimensions like \( (X,Y,Z) \) or more.</p>
+							<p>For example, if we roll two separate dice, we have two independent outcomes. \( X \) is the result of the first die and \( Y \) is the result of the second die. The pair \( (X,Y) \) represents the outcome of the entire experiment as a 2D random vector.</p>
+							<p>Another example, we throw a dart at a circular board, the position of the hit is defined by two coordinates. By assigning a coordinate system to the board, we define \( X \) as the horizontal coordinate and \( Y \) as the vertical coordinate. The point where the dart hits is the vector \( (X,Y) \).</p>
+							<p>Simple enough, although some of us have PTSD from the word vector.</p>
+						</div>
+					</div>
+					<h1>Joint Cumulative Distribution Function</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The joint cdf is simply the cdf we <a href="/pages/posts/statistics/2.2_continuous_random_variables.html">already learned</a> but now applied to a pair of variables simultaneously. It represents the probability that both random variables, \( X \) and \( Y \), are less than or equal to their respective thresholds, \( x \) and \( y \). Defined as:</p>
+							<p>$$F(x,y)=P(X\le x,Y\le y)$$</p>
+							<p>If we have the joint cdf, we can then figure out the individual behavior of \( X \) or \( Y \), these are known as marginal cdf's:</p>
+							<p>$$F_{X}(x)=F(x,\infty)$$</p>
+							<p>$$F_{Y}(y)=F(\infty,y)$$</p>
+							<p>So to find the marginal cdf of a variable we just look at the limit where the other variable goes to infinity. This works because by setting one of the variables to infinity we are accounting for all possible outcomes of that variable, which allows us to isolate the probability distribution of the other.</p>
+						</div>
+					</div>
+					<h1>Discrete Random Vectors</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Intuitively, when both \( X \) and \( Y \) are discrete random variables then the pair \( (X,Y) \) is a discrete random vector. To find the likelihood of specific pairs of outcomes, we can use the joint pmf. If \( X \) has the range \( \{x_{1}​,x_{2}​,\cdots\} \) and \( Y \) has the range \( \{y_{1}​,y_{2}​,\cdots\} \) then:</p>
+							<p>$$p(x_{i},y_{i})=P(X=x_{i},Y=y_{i})$$</p>
+							<p>Just like the cdf, we can marginalize the joint pmf to find the individual probabilities for \( X \) or \( Y \) by summing over all possible values of the other variable:</p>
+							<p>$$p_{X}(x_{i})=\sum_{j=1}^{\infty}p(x_{i},y_{j})$$</p>
+							<p>$$p_{Y}(y_{j})=\sum_{i=1}^{\infty}p(x_{i},y_{j})$$</p>
+							<h3>Example 1</h3>
+							<p>If we roll two dice, let's let \( X \) be the outcome of the first die and \( Y \) be the outcome of the second. We want to find the pmf. First, remember that each die is independent and has six possible outcomes \( \{1,2,3,4,5,6\} \). Since there are six outcomes for the first die and six for the second, there are a total of \( 6\times6=36 \) equally likely outcomes for the pair \( (X,Y) \). So the pmf would just be:</p>
+							<p>$$p(x,y)=\frac{1}{36},\quad x,y\in\{1,2,3,4,5,6\}$$</p>
+							<p>Then to find the marginal pmf:</p>
+							<p>$$p_{X}(x_{i})=\sum_{j=1}^{6}p(x_{i},y_{j})=\sum_{j=1}^{6}\frac{1}{36}=6\times\frac{1}{36}=\frac{1}{6}$$</p>
+							<p>Which confirms that the probability of any specific outcome on a single die is 1/6.</p>
+							<h3>Example 2</h3>
+							<p>Let \( X \) be the number of health spam emails my grandma gets in a day and \( Y \) be the total number of spam emails she gets in a day. Also assume \( Y∼\text{Pois}(2) \) and that 75% of all spam mail is health related. Let's now find the joint pmf of the pair \( (X,Y) \).</p>
+							<p>In order to find the joint pmf, we need to calculate \( P(X=x,Y=y) \), which is the probability of getting exactly \( x \) health spam emails given a total of \( y \) spam emails.</p>
+							<p>As for total emails \( Y \) follows a Poisson distribution with parameter \( \lambda=2 \). The pmf for \( Y \) is then:</p>
+							<p>$$P(Y=y)=\frac{e^{-2}2^{y}}{y!}$$</p>
+							<p>Then for health spam \( X \) given a total of \( Y=y \) emails, each email has a 75% probability of being health related. So for a fixed \( y \), \( X \) follows a binomial distribution: \( X∣Y=y∼\text{bin}(y,0.75) \):</p>
+							<p>$$P(X=x|Y=y)=\begin{pmatrix}
+								y \\
+								x
+								\end{pmatrix}(0.75)^{x}(0.25)^{y-x}$$</p>
+							<p>The joint pmf is the product of the marginal distribution of \( Y \) and the conditional distribution of \( X \) given \( Y \):</p>
+							<p>$$P(X=x,Y=y)=P(X=x|Y=y)\times P(Y=y)$$</p>
+							<p>When we substitute the formulas in we get:</p>
+							<p>$$P(X=x,Y=y)=\left[ \begin{pmatrix}
+								y \\
+								x
+								\end{pmatrix}(0.75)^{x}(0.25)^{y-x} \right]\times\left[ \frac{e^{-2}2^{y}}{y!} \right]$$</p>
+							<p>Now we get to the joyous step of simplifying. The first thing we can do is expand the binomial coefficient:</p>
+							<p>$$P(X=x,Y=y)=\frac{y!}{x!(y-x)!}(0.75)^{x}(0.25)^{y-x}\times\frac{e^{-2}2^{y}}{y!}$$</p>
+							<p>The factorials of \( y \) cancel out giving us our resulting joint pmf:</p>
+							<p>$$P(X=x,Y=y)=\frac{(0.75)^{x}(0.25)^{y-x}\times e^{-2}2^{y}}{x!(y-x)!}$$</p>
+							<p>But, even though we know the marginal pmf of \( Y \), the marginal pmf of \( X \) is not automatically given by the inital problem statement. It instead is a result of the joint relationship between \( X \) and \( Y \).</p>
+							<p>Since \( X \) represents the number of successes (health spam) in a process where the trials (total emails \( Y \)) follow a Poisson distribution, there is a known property in probability that \( X \) also follows a Poisson distribution. Specifically, if \( Y∼\text{Pois}(\lambda) \) and we keep each item with probability \( p \), then \( X∼\text{Pois}(\lambda\times p) \). Remember we have the values:</p>
+							<ul>
+								<li>\( \lambda=2 \)</li>
+								<li>\( p=0.75 \)</li>
+								<li>\( \lambda_{X}=2\times0.75=1.5 \)</li>
+							</ul>
+							<p>We can then solve for the marginal pmf of \( X \):</p>
+							<p>$$P(X=x)=\frac{e^{-1.5}(1.5)^{x}}{x!}$$</p>
+						</div>
+					</div>
+					<h1>Continuous Random Vectors</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A random vector \( (X,Y) \) is jointly continuous if there exists a joint pdf function \( f(x,y) \). The probability that the random vector falls into this region is calculated using a double integral for any subset \( B \):</p>
+							<p>$$P((x,y)\in B)=\int\int_{B}f(x,y)dxdy$$</p>
+							<p>For this to be a valid pdf we of course must continue to obey the non-negativity and certainty axioms. That the probability cannot be negative and the total area under the pdf curve is equal to one exactly.</p>
+							<p>Similar to how we used summation to find marginals in the case of discrete random vectors, we use integration to find the marginal pdf:</p>
+							<p>$$f_{X}(x)=\int_{-\infty}^{\infty}f(x,y)dy$$</p>
+							<p>$$f_{Y}(y)=\int_{-\infty}^{\infty}f(x,y)dx$$</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
