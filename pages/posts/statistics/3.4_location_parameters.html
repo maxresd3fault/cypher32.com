@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 3.4 - Location Parameters</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces the median and mode for random variables along with data sets and the failure rate function.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 3.4 - Location Parameters</h2>
+							<em class="date">4/27/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>3.4 introduces the median and mode for random variables along with data sets and the failure rate function.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Median</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A number \( m \) is considered to be the median of a random variable \( X \) if the probability that \( X \) is less than or equal to \( m \) is at least 0.5, and the probability that \( X \) is greater than or equal to \( m \) is at least 0.5:</p>
+							<p>$$P(X\le m)\ge\frac{1}{2}$$</p>
+							<p>$$P(X\ge m)\ge\frac{1}{2}$$</p>
+							<p>For example, we roll a die: the probability of rolling any specific number in the range \( \{1,2,3,4,5,6\} \) is exactly 1/6. If we test the value three for instance:</p>
+							<p>$$P(X\le 3)=P(1)+P(2)+P(3)=\frac{3}{6}=\frac{1}{2}$$</p>
+							<p>$$P(X\ge 3)=P(3)+P(4)+P(5)+P(6)=\frac{4}{6}=\frac{2}{3}\ge\frac{1}{2}$$</p>
+							<p>Since both conditions are met, three is a median. But, if we test the value four as well:</p>
+							<p>$$P(X\le 4)=P(1)+P(2)+P(3)+P(4)=\frac{4}{6}=\frac{2}{3}\ge\frac{1}{2}$$</p>
+							<p>$$P(X\ge 4)=P(4)+P(5)+P(6)=\frac{3}{6}=\frac{1}{2}$$</p>
+							<p>As we can see, four is also a median. For this scenario, any number in the interval \( [3,4] \) satisfies the conditions for being a median. Medians for random variables are not always unique, and there can be more than one.</p>
+							<p>If \( X \) is a continuous random variable with a pdf \( f \) that is positive on an interval, the median \( m \) is the value where the cdf equals exactly 0.5​:</p>
+							<p>$$F(m)=\frac{1}{2}$$</p>
+							<p>Essentially, the median is the middle point where the total probability (which is 1) is split into two equal halves of 0.5.</p>
+						</div>
+					</div>
+					<h1>Mode</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>A number \( x_{m} \)​ is considered a mode of a random variable \( X \) (which has a pmf or pdf \( f \)) if:</p>
+							<p>$$f(x_{m})\ge f(x)$$</p>
+							<p>The mode represents the global maximum of the pdf/pmf. If a distribution is multimodal, it contains multiple local maxima, which are referred to as local modes.</p>
+							<h3>Example 1</h3>
+							<p>Let's try to find the median and mode of the standard normal distribution. If you recall from <a href="/pages/posts/statistics/3.2_continuous_distributions.html">3.2</a> its pdf is defined as:</p>
+							<p>$$f(x)=\frac{1}{\sqrt{2\pi}}e^{-\frac{1}{2}x^{2}}$$</p>
+							<p>By our definition, the median \( m \) must satisfy \( F(m)=0.5 \) (cdf). Since the standard normal distribution is perfectly symmetric, exactly half of the area under the curve lies to the left of zero, and half lies to the right, therefore the median is zero.</p>
+							<p>And as for the mode, it is the value \( x_{m} \)​ where the pdf reaches its global maximum. For the standard normal distribution, the pdf reaches its highest point when the exponent is zero. This occurs when \( x=0 \). So again, the mode is zero.</p>
+							<h3>Example 2</h3>
+							<p>Let's find the median and mode for the exponential distribution also from <a href="/pages/posts/statistics/3.2_continuous_distributions.html">3.2</a> now. First the median, remember the cdf from the exponential distribution is:</p>
+							<p>$$F(x)=1-e^{-\lambda x}$$</p>
+							<p>Setting \( F(m)=0.5 \):</p>
+							<p>$$1−e^{−\lambda m}=0.5$$</p>
+							<p>$$0.5=e^{−\lambda m}$$</p>
+							<p>Take the natural log to get rid of \( e \):</p>
+							<p>$$\text{ln}(0.5)=-\lambda m$$</p>
+							<p>$$-\text{ln}(2)=-\lambda m$$</p>
+							<p>Finally solve for \( m \):</p>
+							<p>$$m=\frac{\text{ln}(2)}{\lambda}$$</p>
+							<p>And this result is our median!</p>
+							<p>Again, the mode is the value \( x_{m} \)​ that maximizes the pdf. The pdf for the exponential distribution is:</p>
+							<p>$$f(x)=\lambda e^{-\lambda x}$$</p>
+							<p>This is a strictly decreasing function for \( x\ge0 \). Therefore, the maximum value occurs at the boundary, \( x=0 \), and that is our mode.</p>
+						</div>
+					</div>
+					<h1>Data Sets</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>Imagine we have the finite set \( D=\{x_{1}​,x_{2}​,\cdots,x_{n}\} \). We can classify this as, well, a set of data. And we can find the mean of it by finding the average of all the values in the set. Like so:</p>
+							<p>$$\frac{1}{n}\sum_{k=1}^{n}x_{k}$$</p>
+							<p>The median of a data set is the middle value. To find it, we must first arrange the data in ascending order: \( x_{1}​\le x_{2}​\le\cdots\le x_{n}​ \). The calculation then depends on whether the number of data points (\( n \)) is even or odd. If even:</p>
+							<p>$$\frac{1}{2}\left( x_{\frac{n}{2}}+x_{\frac{n}{2}+1} \right)$$</p>
+							<p>If odd:</p>
+							<p>$$x_{\frac{n+1}{2}}$$</p>
+							<p>The mode is simply defined as the most frequent value/values within the set.</p>
+						</div>
+					</div>
+					<h1>Failure Rate Function</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>The failure rate function is typically used for random variables that measure the lifetimes of items or objects. Let \( T \) be a random variable representing lifetime with a pdf \( f \) and a cdf \( F \). The failure rate function \( r(t) \) is then defined as:</p>
+							<p>$$r(t)=\frac{f(t)}{1-F(t)}$$</p>
+							<ul>
+								<li>\( F(t)=P(T\le t) \) - this is the probability that the object fails at or before time \( t \)</li>
+								<li>\( 1−F(t)=P(T\gt t) \) - this represents the probability that the object survives beyond time \( t \)</li>
+							</ul>
+							<p>Essentially \( r(t) \) provides a measure of the failure risk for objects that have already survived up to a certain time \( t \).</p>
+							<h3>Survival Function</h3>
+							<p>The survival function \( G(t) \) is defined as the probability that an object continues to survive beyond time \( t \):</p>
+							<p>$$G(t)=1-F(t)=P(X\gt t)$$</p>
+							<p>There is a theorem that links the survival function \( G(t) \) to the failure rate function \( r(t) \):</p>
+							<p>$$G(t)=e^{-\int_{0}^{t}r(y)dy}$$</p>
+							<h3>Example</h3>
+							<p>Let's assume a certain insect lives for a median age of two months, and its death rate is \( r(t)=at^{2} \) for \( t\ge0 \). First we can try to solve for the constant \( a \). To do this we can use the definition of the median. The median \( m=2 \) is the point where the probability of surviving is 0.5: \( G(2)=0.5 \). Knowing what we just learned from above, we can setup:</p>
+							<p>$$G(2)=e^{-\int_{0}^{2}ay^{2}dy}=0.5$$</p>
+							<p>After integrating we get:</p>
+							<p>$$e^{-\frac{8a}{3}}=0.5$$</p>
+							<p>Using the natural log again:</p>
+							<p>$$-\frac{8a}{3}=-\text{ln}(2)$$</p>
+							<p>Finally solve:</p>
+							<p>$$a=\frac{3\text{ln}(2)}{8}\approx0.2599$$</p>
+							<p>What about the probability the insect survives at least three months? We then want to find \( P(T\gt3) \), which is \( G(3) \):</p>
+							<p>$$G(3)=e^{-\int_{0}^{3}ay^{2}dy}$$</p>
+							<p>Integration resolves this to \( 9a \), we already calculated the value of the \( a \) constant from before so we can substitute now:</p>
+							<p>$$9\left( \frac{3\text{ln}(2)}{8} \right)=\frac{27\text{ln}(2)}{8}\approx2.3393$$</p>
+							<p>Then we can calculate the final result:</p>
+							<p>$$G(3)=e^{-\frac{27\text{ln}(2)}{8}}\approx0.0963$$</p>
+							<p>Meaning there is approximately a 9.6% chance that an insect of this kind survives at least three months.</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
