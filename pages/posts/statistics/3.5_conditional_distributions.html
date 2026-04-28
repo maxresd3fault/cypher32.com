@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="robots" content="index, follow">
+		<meta name="viewport" content="width=960">
+		<link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+		<link rel="stylesheet" href="/css/styles.min.css"/>
+		<title>Cypher32 - Statistics 3.5 - Conditional Distributions</title>
+		<meta name="description" content="For the purpose of better understanding my current statistics class, and to foster a deeper understanding of the content, I have decided to surmise what I am learning here. This article introduces conditional distributions for both discrete and continuous random variables.">
+	</head>
+	<body>
+		<div id="container">
+			<script id="replace_with_navbar" src="/js/navbar.js"></script>
+			<div id="pageBody">
+				<script id="replace_with_sidebar" src="/js/sidebar.js"></script>
+				<div id="col-R">
+					<div id="page-banner">
+						<div id="page-desc">
+							<h2>Statistics 3.5 - Conditional Distributions</h2>
+							<em class="date">4/28/2026</em>
+							<hr>
+							<p>This article is part of a series on statistics. Find more <a href="#">soon</a>.</p>
+							<p>3.5 introduces conditional distributions for both discrete and continuous random variables.</p>
+						</div>
+						<div id="page-thumbnail">
+							<img src="/images/posts/statistics/dice.webp" alt="dice.webp" width="300" height="250"/>
+						</div>
+					</div>
+					<h1>Discrete Cases</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>For two discrete random variables, \( X \) and \( Y \), with the ranges \( \{x_{1}​,x_{2}​,\cdots\} \) and \( \{y_{1}​,y_{2}​,\cdots\} \), the conditional pmf of \( Y \) given that \( X \) takes a specific value \( x_{i} \)​ is defined as:</p>
+							<p>$$p_{Y}(y_{j}|x_{i})=\frac{p(x_{i},y_{j})}{p_{X}(x_{i})}$$</p>
+							<p>We can also find the marginal pmf of \( Y \) by summing over all possible values of \( X \) using the conditional distribution:</p>
+							<p>$$p_{Y}(y_{j})=\sum_{i=1}^{\infty}p(x_{i},y_{j})=\sum_{i=1}^{\infty}p_{Y}(y_{j}|x_{i})p_{X}(x_{i})$$</p>
+							<p>Finally, the conditional cdf is the sum of the conditional pmf values for all \( y_{j} \)​ that are less than or equal to a specific value \( y \):</p>
+							<p>$$F_{Y}(y|x_{i})=\sum_{j:y_{j}\le y}^{}p_{Y}(y_{j}|x_{i})$$</p>
+							<h3>Example</h3>
+							<p>Let \( X \) be the number of text messages I get from my mom in a day, and let \( Y \) be the total number of text messages I get in a day. Let's imagine that 75% of all my texts are from my mom. Assume that:</p>
+							<p>$$X∼\text{Pois}\left( \frac{3}{2} \right)$$</p>
+							<p>Also assume the marginal pmf of \( X \) is:</p>
+							<p>$$p_{X}(2)=\frac{e^{-1.5}(1.5)^{2}}{2!}$$</p>
+							<p>Lastly, assume the joint pmf is:</p>
+							<p>$$p(i,j)=\frac{e^{-2}3^{i}}{i!(j-i)!2^{j}}$$</p>
+							<p>Now, if I got two texts from my mom so far today, what is the probability that I get at least two more (from anyone), for a total of four texts? First we use the conditional pmf we just learned, and plug in 2 and 4 for \( X \) and \( Y \):</p>
+							<p>$$p_{Y}(4|2)=\frac{p(2,4)}{p_{X}(2)}$$</p>
+							<p>We substitute into the joint pmf:</p>
+							<p>$$p(2,4)=\frac{e^{-2}\times3^{2}}{2!\times(4-2)!\times2^{4}}=\frac{e^{-2}\times9}{2\times2\times16}=\frac{9e^{-2}}{64}$$</p>
+							<p>Then we find \( p_{X}(2) \) using the definition of a Poisson distribution:</p>
+							<p>$$p_{X}(2)=\frac{e^{-1.5}\times(1.5)^{2}}{2\times1}=\frac{2.25e^{-1.5}}{2}=1.125e^{-1.5}$$</p>
+							<p>Finally we put all this back into the conditional pmf:</p>
+							<p>$$p_{Y}(4|2)=\frac{\frac{9e^{-2}}{64}}{1.125e^{-1.5}}=\frac{9e^{-2}}{64\times1.125e^{-1.5}}=\frac{9e^{-2}}{72e^{-1.5}}=\frac{1}{8}e^{-0.5}\approx0.0758$$</p>
+							<p>Meaning the probability that I get four texts in total, given that two of them were from my mom already is approximately 7.58%.</p>
+						</div>
+					</div>
+					<h1>Continuous Cases</h1>
+					<div class="cnt-box">
+						<div class="cnt-info">
+							<p>In the continuous case, we use the joint pdf \( f(x,y) \) and the marginal pdf \( f_{X}​(x) \). As for the conditional pdf, the density of \( Y \) given \( X=x \) is the ratio of the joint density to the marginal density:</p>
+							<p>$$f_{Y}(y|x)=\frac{f(x,y)}{f_{X}(x)}$$</p>
+							<p>And for the conditional cdf, we find the probability that \( Y \) is less than or equal to \( y \) given a specific \( x \), we integrate the conditional pdf:</p>
+							<p>$$F_{Y}(y|x)=\int_{-\infty}^{y}f_{Y}(t|x)dt$$</p>
+							<p>Additionally, we can recover the marginal pdf of \( Y \) by integrating the conditional pdf weighted by the marginal of \( X \):</p>
+							<p>$$f_{Y}(y)=\int_{-\infty}^{\infty}f_{Y}(y|x)f_{X}(x)dx$$</p>
+							<h3>Probabilities</h3>
+							<p>Imagine we want to find the total probability that \( Y \) falls within a specific range (set \( A \)), but we don't know \( Y \) directly. However, we do know how \( Y \) behaves for every possible value of \( X \). We can do this like so:</p>
+							<p>$$P(Y\in A)=\int_{-\infty}^{\infty}P(Y\in A|X=x)f_{X}(x)dx$$</p>
+							<p>What about instead of just looking at \( Y \), we are looking at a region \( B \) in a 2D space (where \( X \) and \( Y \) are coordinates). We want to know the probability that a random point \( (X,Y) \) lands inside this shape. This can be computed with:</p>
+							<p>$$P((X,Y)\in B)=\int_{-\infty}^{\infty}P((x,Y)\in B|X=x)f_{X}(x)dx$$</p>
+						</div>
+					</div>
+				</div>
+				<div class="clear-B"></div>
+			</div>
+		</div>
+		<script id="replace_with_footer" src="/js/footer.js"></script>
+		<script>
+			MathJax = {
+				tex: {
+					inlineMath: [['$', '$'], ['\\(', '\\)']]
+				}
+			};
+		</script>
+		<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+	</body>
+</html>
